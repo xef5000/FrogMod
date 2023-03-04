@@ -1,0 +1,18 @@
+[
+  {
+	"modid": "frogmod",
+	"name": "Frog Mod",
+	"description": "FrogMod - Utility skyblock mod",
+	"version": "1.0.0",
+	"mcversion": "1.8.9",
+	"url": "https://github.com/romangraef/Forge1.8.9Template/",
+	"updateUrl": "",
+	"authorList": [
+	  "xef5000"
+	],
+	"credits": "ctjs, pizza",
+	"logoFile": "",
+	"screenshots": [],
+	"dependencies": []
+  }
+]
