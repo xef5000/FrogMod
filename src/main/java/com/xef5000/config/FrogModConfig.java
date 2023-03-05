@@ -17,14 +17,14 @@ public class FrogModConfig extends Vigilant {
             description = "Will send a message when a player dies. Example: \"player you should download FrogMod to stop dying!\"",
             category = "Automatic Messages", subcategory = "Death Message"
     )
-    public String toxicDeathMessageStr = "player you should download FrogMod to stop dying!";
+    public String deathMessageMessage = "player you should download FrogMod to stop dying!";
 
     @Property(
-            type = PropertyType.SWITCH, name = "Toxic death message",
+            type = PropertyType.SWITCH, name = "Toxic death message toggle",
             description = "Toggle the feature",
             category = "Automatic Messages", subcategory = "Death Message"
     )
-    public boolean toxicDeathMessageBol = true;
+    public boolean toxicDeathMessage = true;
 
     @Property(
             type = PropertyType.SWITCH, name = "Watcher Ready",

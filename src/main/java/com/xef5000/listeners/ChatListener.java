@@ -15,11 +15,11 @@ public class ChatListener {
     public void onClientChatReceived(ClientChatReceivedEvent event) {
         String stripped = EnumChatFormatting.getTextWithoutFormattingCodes(event.message.getUnformattedText());
 
-        if (FrogMod.INSTANCE.getFrogModConfig().toxicDeathMessageBol) {
+        if (FrogMod.INSTANCE.getFrogModConfig().toxicDeathMessage) {
             if(stripped.contains("☠") && stripped.endsWith("became a ghost.") && !stripped.contains(":")) {
                 String deadPlayer = stripped.split(" ")[2];
                 if(deadPlayer.equals("You")) return;
-                Minecraft.getMinecraft().thePlayer.sendChatMessage("/pc " + FrogMod.INSTANCE.getFrogModConfig().toxicDeathMessageStr.replace("player", deadPlayer));
+                Minecraft.getMinecraft().thePlayer.sendChatMessage("/pc " + FrogMod.INSTANCE.getFrogModConfig().deathMessageMessage.replace("player", deadPlayer));
 
             }
         }
