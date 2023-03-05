@@ -10,8 +10,7 @@ A Hypixel Skyblock Utilities mod.
 ***
 ## Features
 
-<details>
-  <summary>Dungeons</summary>
+
 #### Dungeons
 - Custom toxic death message
 - Special 270/300 score message
@@ -20,7 +19,6 @@ A Hypixel Skyblock Utilities mod.
 - Watcher Ready/Cleared alert
 - Terminal ESP
 
-</details>
 
 ### Discord
 - https://discord.gg/Y2JHvSgGcb
