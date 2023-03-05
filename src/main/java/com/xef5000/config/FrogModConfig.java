@@ -11,14 +11,12 @@ import java.io.File;
 
 public class FrogModConfig extends Vigilant {
 
-/*
+
     @Property(
             type = PropertyType.TEXT, name = "Toxic death message",
             description = "Will send a message when a player dies. Example: \"player you should download FrogMod to stop dying!\"",
             category = "Automatic Messages", subcategory = "Death Message"
     )
-
- */
     public String toxicDeathMessageStr = "player you should download FrogMod to stop dying!";
 
     @Property(
