@@ -8,6 +8,7 @@ import net.minecraft.tileentity.TileEntityCommandBlock;
 import net.minecraft.util.BlockPos;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class TerminalOverlay {
     private static ArrayList<TileEntityCommandBlock> queueRenderRed = new ArrayList<>();
     private static ArrayList<TileEntityCommandBlock> queueRenderGreen = new ArrayList<>();
     public static boolean phase3 = false;
+    private int tick = 0;
 
     public static void resetRenderQueues() {
         queueRenderGreen.clear();
@@ -35,6 +37,17 @@ public class TerminalOverlay {
             Visual.renderWaypointText("Terminal Active", new BlockPos(commandBlock.getPos().getX(), commandBlock.getPos().getY(), commandBlock.getPos().getZ()), event.partialTicks);
         }
 
+
+    }
+
+    @SubscribeEvent
+    public void onTick(TickEvent event) {
+        tick++;
+        if (tick % 60 == 0) {
+            if(phase3) {
+                new Thread(TerminalOverlay::scanMap).start();
+            }
+        }
 
     }
 

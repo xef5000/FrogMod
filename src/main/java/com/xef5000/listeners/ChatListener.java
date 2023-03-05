@@ -19,7 +19,7 @@ public class ChatListener {
             if(stripped.contains("☠") && stripped.endsWith("became a ghost.") && !stripped.contains(":")) {
                 String deadPlayer = stripped.split(" ")[2];
                 if(deadPlayer.equals("You")) return;
-                Minecraft.getMinecraft().thePlayer.sendChatMessage("pc " + FrogMod.INSTANCE.getFrogModConfig().toxicDeathMessageStr.replace("player", deadPlayer));
+                Minecraft.getMinecraft().thePlayer.sendChatMessage("/pc " + FrogMod.INSTANCE.getFrogModConfig().toxicDeathMessageStr.replace("player", deadPlayer));
 
             }
         }
