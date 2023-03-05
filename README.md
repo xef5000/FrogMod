@@ -4,7 +4,7 @@
 
 A Hypixel Skyblock Utilities mod.
 
-- Lot of Overlay/Tracker
+- Lots of Overlay/Tracker
 - Original features
  
 ## Features
