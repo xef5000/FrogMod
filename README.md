@@ -4,10 +4,9 @@
 
 A Hypixel Skyblock Utilities mod.
 
-- Lot of Overlay/Tracker
+- Lots of Overlay/Tracker
 - Original features
  
-***
 ## Features
 
 
@@ -23,6 +22,5 @@ A Hypixel Skyblock Utilities mod.
 ### Discord
 - https://discord.gg/Y2JHvSgGcb
 
-***
 
 
