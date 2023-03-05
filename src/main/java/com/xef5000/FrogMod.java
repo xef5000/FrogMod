@@ -6,14 +6,12 @@ import com.xef5000.features.TerminalOverlay;
 import com.xef5000.listeners.ChatListener;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.init.Blocks;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
+
 
 @Mod(modid = "frogmod", version = "1.0.0")
 public class FrogMod {
@@ -42,24 +40,6 @@ public class FrogMod {
         config.preload();
         ClientCommandHandler.instance.registerCommand(new FrogModMainCommand());
 
-    }
-
-    @SubscribeEvent
-    public void onTick(TickEvent.ClientTickEvent event) {
-        if(event.phase != TickEvent.Phase.START) {
-            return;
-        }
-        if (Minecraft.getMinecraft().thePlayer == null) {
-            openGUI = null;
-            return;
-        }
-        if (openGUI != null) {
-            if (Minecraft.getMinecraft().thePlayer.openContainer != null) {
-                Minecraft.getMinecraft().thePlayer.closeScreen();
-            }
-            Minecraft.getMinecraft().displayGuiScreen(openGUI);
-            openGUI = null;
-        }
     }
 
     public FrogModConfig getFrogModConfig() {

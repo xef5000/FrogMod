@@ -1,21 +1,13 @@
 package com.xef5000.utils;
 
 import com.xef5000.FrogMod;
-import gg.essential.elementa.font.DefaultFonts;
-import gg.essential.universal.UMatrixStack;
-import kotlin.Triple;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.util.EnumChatFormatting;
-import org.lwjgl.util.vector.Vector3f;
 import net.minecraft.client.Minecraft;
 
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiIngame;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.ScaledResolution;
+
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -27,12 +19,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 import net.minecraft.block.Block;
-import gg.essential.universal.UGraphics;
 
 import java.awt.*;
 
-import static net.minecraft.client.renderer.RenderGlobal.drawSelectionBoundingBox;
-import static org.lwjgl.opengl.GL11.*;
 
 
 
@@ -42,9 +31,6 @@ public class Visual {
     public static void showTitle(String title, String subtitle, int fadeIn, int time, int fadeOut) {
         GuiIngame gui = Minecraft.getMinecraft().ingameGUI;
         gui.displayTitle(addColor(title), addColor(subtitle), fadeIn, time, fadeOut);
-        //gui.displayTitle(null, addColor(subtitle), fadeIn, time, fadeOut);
-        //gui.displayTitle(null, null, fadeIn, time, fadeOut);
-        //gui.displayTitle(null, null, 1, 1, 1);
     }
     public static String addColor(String message) {
         return message.toString().replace("(?<!\\\\)&(?![^0-9a-fk-or]|$)", "\u00a7");

@@ -2,19 +2,15 @@ package com.xef5000.features;
 
 import com.xef5000.FrogMod;
 import com.xef5000.utils.Visual;
-import gg.essential.universal.UMatrixStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityArmorStand;
 import net.minecraft.tileentity.TileEntityCommandBlock;
 import net.minecraft.util.BlockPos;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import scala.Int;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class TerminalOverlay {
 
@@ -55,21 +51,22 @@ public class TerminalOverlay {
                         if (!queueRenderGreen.contains(commandBlock)) {
                             queueRenderGreen.add(commandBlock);
                             queueRenderRed.remove(commandBlock);
+                            listArmorStands.remove(armorStand);
+                            return;
                         }
                     }
                     if (armorStand.getName().contains("Inactive Terminal")) {
                         if (!queueRenderRed.contains(commandBlock)) {
                             if (queueRenderGreen.contains(commandBlock)) return;
                             queueRenderRed.add(commandBlock);
+                            listArmorStands.remove(armorStand);
+                            return;
                         }
                     }
                 }
 
             }
         }
-        System.out.println("Scanned map!");
-        System.out.println("Queue Render Red: " + queueRenderRed.size());
-        System.out.println("Queue Render Green: " + queueRenderGreen.size());
 
     }
 
