@@ -4,12 +4,10 @@ import com.xef5000.FrogMod;
 import com.xef5000.features.TerminalOverlay;
 import com.xef5000.utils.Visual;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.awt.*;
 
 public class ChatListener {
 
