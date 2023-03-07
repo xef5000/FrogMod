@@ -96,7 +96,7 @@ dependencies {
 
     embed "gg.essential:loader-launchwrapper:1.1.3"
     implementation "gg.essential:vigilance-1.8.9-forge:195"
-    implementation "gg.essential:Essential:1193-10809-SNAPSHOT"
+    implementation "gg.essential:essential-1.8.9-forge:10877+g04722d17a"
 }
 
 jar {

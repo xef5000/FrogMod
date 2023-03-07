@@ -13,6 +13,21 @@ public class FrogModConfig extends Vigilant {
 
 
     @Property(
+            type = PropertyType.SWITCH, name = "Throne Finder",
+            description = "Will try to find thrones in the crystals hollows",
+            category = "Mining", subcategory = "Structure Finder"
+    )
+    public boolean throneFinder = false;
+
+    @Property(
+            type = PropertyType.SWITCH, name = "Xalt Finder",
+            description = "Will try to find xalt in the crystals hollows",
+            category = "Mining", subcategory = "Structure Finder"
+    )
+    public boolean xaltFinder = false;
+
+
+    @Property(
             type = PropertyType.TEXT, name = "Toxic death message",
             description = "Will send a message when a player dies. Example: \"player you should download FrogMod to stop dying!\"",
             category = "Automatic Messages", subcategory = "Death Message"

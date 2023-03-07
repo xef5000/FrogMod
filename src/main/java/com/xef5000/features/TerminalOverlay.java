@@ -42,12 +42,15 @@ public class TerminalOverlay {
 
     @SubscribeEvent
     public void onTick(TickEvent event) {
-        tick++;
-        if (tick % 60 == 0) {
-            if(phase3) {
-                new Thread(TerminalOverlay::scanMap).start();
+        if(FrogMod.INSTANCE.getFrogModConfig().terminalOverlay) {
+            tick++;
+            if (tick % 60 == 0) {
+                if(phase3) {
+                    new Thread(TerminalOverlay::scanMap).start();
+                }
             }
         }
+
 
     }
 

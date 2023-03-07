@@ -3,6 +3,8 @@ package com.xef5000;
 import com.xef5000.commands.FrogModMainCommand;
 import com.xef5000.config.FrogModConfig;
 import com.xef5000.features.TerminalOverlay;
+import com.xef5000.features.ThroneFinder;
+import com.xef5000.features.XaltFinder;
 import com.xef5000.listeners.ChatListener;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -30,6 +32,8 @@ public class FrogMod {
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new ChatListener()); // Chat Listeners
         MinecraftForge.EVENT_BUS.register(new TerminalOverlay());
+        MinecraftForge.EVENT_BUS.register(new ThroneFinder());
+        MinecraftForge.EVENT_BUS.register(new XaltFinder());
         mc = Minecraft.getMinecraft();
 
 
