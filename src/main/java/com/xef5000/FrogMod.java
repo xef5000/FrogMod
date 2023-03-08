@@ -42,6 +42,7 @@ public class FrogMod {
     public void init(FMLInitializationEvent event) {
         config = new FrogModConfig();
         config.preload();
+        ThroneFinder.scannerWidth = config.throneFinderRange;
         ClientCommandHandler.instance.registerCommand(new FrogModMainCommand());
 
     }

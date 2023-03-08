@@ -21,15 +21,15 @@ public class FrogModConfig extends Vigilant {
 
     @Property(
             type = PropertyType.SLIDER, name = "Throne Finder Range",
-            description = "Range for throne finder in blocks",
-            category = "Mining", subcategory = "Structure Finder", min = 5, max = 150
+            description = "Range for throne finder in blocks. Recommended is 110 or under",
+            category = "Mining", subcategory = "Structure Finder", min = 15, max = 150
     )
     public int throneFinderRange = 30;
 
 
     @Property(
             type = PropertyType.SWITCH, name = "Xalx Finder",
-            description = "Will try to find xalx in the crystals hollows. Uses hypixel's render distance, so less than 2 chunks.",
+            description = "Will try to find xalx in the crystals hollows. Uses hypixel's render distance, so around 2 chunks.",
             category = "Mining", subcategory = "Structure Finder"
     )
     public boolean xaltFinder = false;
@@ -38,14 +38,14 @@ public class FrogModConfig extends Vigilant {
     @Property(
             type = PropertyType.TEXT, name = "Toxic death message",
             description = "Will send a message when a player dies. Example: \"player you should download FrogMod to stop dying!\"",
-            category = "Automatic Messages", subcategory = "Death Message"
+            category = "Dungeons", subcategory = "Death Message"
     )
     public String deathMessageMessage = "player you should download FrogMod to stop dying!";
 
     @Property(
             type = PropertyType.SWITCH, name = "Toxic death message toggle",
             description = "Toggle the feature",
-            category = "Automatic Messages", subcategory = "Death Message"
+            category = "Dungeons", subcategory = "Death Message"
     )
     public boolean toxicDeathMessage = true;
 
@@ -65,14 +65,14 @@ public class FrogModConfig extends Vigilant {
     @Property(
             type = PropertyType.SWITCH, name = "Special 270 score message",
             description = "It will send a special message when others say that the 270 score has been reached.",
-            category = "Automatic Messages", subcategory = "Score"
+            category = "Dungeons", subcategory = "Score"
     )
     public boolean special270Score = true;
 
     @Property(
             type = PropertyType.SWITCH, name = "Special 300 score message",
             description = "It will send a special message when others say that the 300 score has been reached.",
-            category = "Automatic Messages", subcategory = "Score"
+            category = "Dungeons", subcategory = "Score"
     )
     public boolean special300Score = true;
 
@@ -86,7 +86,7 @@ public class FrogModConfig extends Vigilant {
     @Property(
             type = PropertyType.SWITCH, name = "Terminal Overlay",
             description = "You will see terminals through walls, allowing you to know which ones are not completed",
-            category = "Terminals", subcategory = "Terminal Overlay"
+            category = "Dungeons", subcategory = "Terminal Overlay"
     )
     public boolean terminalOverlay = true;
 
