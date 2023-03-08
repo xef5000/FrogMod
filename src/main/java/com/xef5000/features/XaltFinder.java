@@ -38,7 +38,7 @@ public class XaltFinder {
                 double z = entity.posZ;
                 String entityName = StringUtils.stripControlCodes(entity.getCustomNameTag());
                 if (entityName.contains("Xalx") && sayXalt) {
-                    FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Found xalt at: "  + EnumChatFormatting.YELLOW + "X = " + x + ", Y = " + y + ", Z = " + z));
+                    FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Found xalx at: "  + EnumChatFormatting.YELLOW + "X = " + x + ", Y = " + y + ", Z = " + z));
                     sayXalt = false;
                 }
             }

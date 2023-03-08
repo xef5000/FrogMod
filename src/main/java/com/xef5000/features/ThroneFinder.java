@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ThroneFinder {
 
     private int ticks;
-    private int scannerWidth = 64;
+    private final int scannerWidth = FrogMod.INSTANCE.getFrogModConfig().throneFinderRange;
     private int pY;
     private int belowY;
     private int aboveY;
@@ -37,28 +37,21 @@ public class ThroneFinder {
     private int z;
     private BlockPos pos;
     private IBlockState state;
+    private boolean sayThrone = true;
 
     public boolean sayNewStructure = true;
 
-    @SubscribeEvent
-    public void onRenderWorldLast(final RenderWorldLastEvent event) {
-        if (!FrogMod.INSTANCE.getFrogModConfig().throneFinder) return;
-        for (BlockPos pos : foundGems) {
-            //Visual.drawFilledEsp(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), Color.BLUE);
-        }
 
-
-    }
 
     @SubscribeEvent
     public void onWorldLoad(WorldEvent.Load event) {
-        foundGems.clear();
+        sayThrone = true;
     }
 
 
     @SubscribeEvent
     public void onTick(TickEvent event) {
-        if (FrogMod.INSTANCE.getFrogModConfig().throneFinder) {
+        if (FrogMod.INSTANCE.getFrogModConfig().throneFinder && sayThrone) {
             ticks++;
             if (ticks % 60 == 0) {
                 ticks = 0;
@@ -85,13 +78,9 @@ public class ThroneFinder {
                     for (x = (int) (FrogMod.mc.thePlayer.posX - scannerWidth); x < FrogMod.mc.thePlayer.posX + scannerWidth; ++x) {
                         for(y = belowY; y < aboveY; ++y) {
                             for (z = (int) (Math.floor(FrogMod.mc.thePlayer.posZ) - scannerWidth); z < FrogMod.mc.thePlayer.posZ + scannerWidth; ++z) {
-                                pos = new BlockPos(x, y, z);
-                                BlockPos pos2 = new BlockPos(x, y + 1, z);
-                                state = FrogMod.mc.theWorld.getBlockState(pos);
-                                IBlockState state2 = FrogMod.mc.theWorld.getBlockState(pos2);
-                                if (state.getBlock() == Blocks.sea_lantern && state2.getBlock() == Blocks.stained_glass && state2.getValue(BlockStainedGlass.COLOR) == EnumDyeColor.LIGHT_BLUE && isNewStructure(pos)) {
-                                    foundGems.add(pos);
-                                    FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Found structure at: "  + EnumChatFormatting.YELLOW + "X = " + x + ", Y = " + y + ", Z = " + z));
+                                if (FrogMod.mc.theWorld.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.cobblestone_wall && isThrone(x, y, z)) {
+                                    FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Found throne at: "  + EnumChatFormatting.YELLOW + "X = " + x + ", Y = " + y + ", Z = " + z));
+                                    sayThrone = false;
                                 }
                             }
                         }
@@ -102,6 +91,59 @@ public class ThroneFinder {
 
             }
         }
+    }
+
+    private boolean isThrone(double x, double y, double z) {
+        /*
+         * NORTH
+         * CHECKS
+         */
+        boolean check1_n = FrogMod.mc.theWorld.getBlockState(new BlockPos(x, y , z)).getBlock() == Blocks.cobblestone_wall;
+        boolean check2_n = FrogMod.mc.theWorld.getBlockState(new BlockPos(x, y , z -1)).getBlock() == Blocks.cobblestone_wall;
+        boolean check3_n = FrogMod.mc.theWorld.getBlockState(new BlockPos(x, y , z -2)).getBlock() == Blocks.cobblestone;
+        boolean check4_n = FrogMod.mc.theWorld.getBlockState(new BlockPos(x + 1, y , z -2)).getBlock() == Blocks.cobblestone;
+        boolean check5_n = FrogMod.mc.theWorld.getBlockState(new BlockPos(x + 2, y , z -2)).getBlock() == Blocks.cobblestone;
+        boolean check6_n = FrogMod.mc.theWorld.getBlockState(new BlockPos(x + 2, y , z -1)).getBlock() == Blocks.cobblestone_wall;
+        boolean check7_n = FrogMod.mc.theWorld.getBlockState(new BlockPos(x + 2, y , z )).getBlock() == Blocks.cobblestone_wall;
+        boolean check8_n = FrogMod.mc.theWorld.getBlockState(new BlockPos(x +1, y, z)).getBlock() == Blocks.air;
+        /*
+         * WEST
+         * CHECKS
+         */
+        boolean check1_w = FrogMod.mc.theWorld.getBlockState(new BlockPos(x, y , z)).getBlock() == Blocks.cobblestone_wall;
+        boolean check2_w = FrogMod.mc.theWorld.getBlockState(new BlockPos(x -1, y , z)).getBlock() == Blocks.cobblestone_wall;
+        boolean check3_w = FrogMod.mc.theWorld.getBlockState(new BlockPos(x -2, y , z)).getBlock() == Blocks.cobblestone;
+        boolean check4_w = FrogMod.mc.theWorld.getBlockState(new BlockPos(x -2, y , z -1)).getBlock() == Blocks.cobblestone;
+        boolean check5_w = FrogMod.mc.theWorld.getBlockState(new BlockPos(x -2, y , z -2)).getBlock() == Blocks.cobblestone;
+        boolean check6_w = FrogMod.mc.theWorld.getBlockState(new BlockPos(x -1, y , z -2)).getBlock() == Blocks.cobblestone_wall;
+        boolean check7_w = FrogMod.mc.theWorld.getBlockState(new BlockPos(x, y , z -2)).getBlock() == Blocks.cobblestone_wall;
+        boolean check8_w = FrogMod.mc.theWorld.getBlockState(new BlockPos(x, y , z -1)).getBlock() == Blocks.air;
+        /*
+         * SOUTH
+         * CHECKS
+         */
+        boolean check1_s = FrogMod.mc.theWorld.getBlockState(new BlockPos(x, y , z)).getBlock() == Blocks.cobblestone_wall;
+        boolean check2_s = FrogMod.mc.theWorld.getBlockState(new BlockPos(x, y , z +1)).getBlock() == Blocks.cobblestone_wall;
+        boolean check3_s = FrogMod.mc.theWorld.getBlockState(new BlockPos(x, y , z +2)).getBlock() == Blocks.cobblestone;
+        boolean check4_s = FrogMod.mc.theWorld.getBlockState(new BlockPos(x -1, y , z +2)).getBlock() == Blocks.cobblestone;
+        boolean check5_s = FrogMod.mc.theWorld.getBlockState(new BlockPos(x -2, y , z +2)).getBlock() == Blocks.cobblestone;
+        boolean check6_s = FrogMod.mc.theWorld.getBlockState(new BlockPos(x -2, y , z +1)).getBlock() == Blocks.cobblestone_wall;
+        boolean check7_s = FrogMod.mc.theWorld.getBlockState(new BlockPos(x -2, y , z)).getBlock() == Blocks.cobblestone_wall;
+        boolean check8_s = FrogMod.mc.theWorld.getBlockState(new BlockPos(x -1, y, z)).getBlock() == Blocks.air;
+        /*
+         * EAST
+         * CHECKS
+         */
+        boolean check1_e = FrogMod.mc.theWorld.getBlockState(new BlockPos(x, y , z)).getBlock() == Blocks.cobblestone_wall;
+        boolean check2_e = FrogMod.mc.theWorld.getBlockState(new BlockPos(x +1, y , z)).getBlock() == Blocks.cobblestone_wall;
+        boolean check3_e = FrogMod.mc.theWorld.getBlockState(new BlockPos(x +2, y , z)).getBlock() == Blocks.cobblestone;
+        boolean check4_e = FrogMod.mc.theWorld.getBlockState(new BlockPos(x +2, y , z +1)).getBlock() == Blocks.cobblestone;
+        boolean check5_e = FrogMod.mc.theWorld.getBlockState(new BlockPos(x +2, y , z +2)).getBlock() == Blocks.cobblestone;
+        boolean check6_e = FrogMod.mc.theWorld.getBlockState(new BlockPos(x +1, y , z +2)).getBlock() == Blocks.cobblestone_wall;
+        boolean check7_e = FrogMod.mc.theWorld.getBlockState(new BlockPos(x, y , z +2)).getBlock() == Blocks.cobblestone_wall;
+        boolean check8_e = FrogMod.mc.theWorld.getBlockState(new BlockPos(x, y , z +1)).getBlock() == Blocks.air;
+
+        return check1_n && check2_n && check3_n && check4_n && check5_n && check6_n && check7_n && check8_n|| check1_w && check2_w && check3_w && check4_w && check5_w && check6_w && check7_w && check8_w|| check1_s && check2_s && check3_s && check4_s && check5_s && check6_s && check7_s && check8_s|| check1_e && check2_e && check3_e && check4_e && check5_e && check6_e && check7_e && check8_e;
     }
 
     private boolean isNewStructure(BlockPos pos) {

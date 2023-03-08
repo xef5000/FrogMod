@@ -14,14 +14,22 @@ public class FrogModConfig extends Vigilant {
 
     @Property(
             type = PropertyType.SWITCH, name = "Throne Finder",
-            description = "Will try to find thrones in the crystals hollows",
+            description = "Will try to find thrones in the crystals hollows.",
             category = "Mining", subcategory = "Structure Finder"
     )
     public boolean throneFinder = false;
 
     @Property(
-            type = PropertyType.SWITCH, name = "Xalt Finder",
-            description = "Will try to find xalt in the crystals hollows",
+            type = PropertyType.SLIDER, name = "Throne Finder Range",
+            description = "Range for throne finder in blocks",
+            category = "Mining", subcategory = "Structure Finder", min = 5, max = 150
+    )
+    public int throneFinderRange = 30;
+
+
+    @Property(
+            type = PropertyType.SWITCH, name = "Xalx Finder",
+            description = "Will try to find xalx in the crystals hollows. Uses hypixel's render distance, so less than 2 chunks.",
             category = "Mining", subcategory = "Structure Finder"
     )
     public boolean xaltFinder = false;
