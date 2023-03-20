@@ -13,10 +13,13 @@ A Hypixel Skyblock Utilities mod.
 #### Dungeons
 - Custom toxic death message
 - Special 270/300 score message
-- Terminal Counter
 - Show extra stats
 - Watcher Ready/Cleared alert
 - Terminal ESP
+
+#### Mining
+- Throne finder
+- Xalx finder 
 
 
 ### Discord
