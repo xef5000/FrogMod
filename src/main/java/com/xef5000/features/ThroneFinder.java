@@ -3,6 +3,8 @@ package com.xef5000.features;
 import com.xef5000.FrogMod;
 import com.xef5000.utils.Visual;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.command.CommandTitle;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntityCommandBlock;
 import net.minecraft.util.BlockPos;
@@ -33,7 +35,7 @@ public class ThroneFinder {
     private IBlockState state;
     private boolean sayThrone = true;
 
-    private BlockPos throneCords;
+    private BlockPos throneCords = new BlockPos(-1000, -1000, -1000);
     public boolean sayNewStructure = true;
 
 
@@ -41,19 +43,19 @@ public class ThroneFinder {
     @SubscribeEvent
     public void onWorldLoad(WorldEvent.Load event) {
         sayThrone = true;
+        throneCords = new BlockPos(-1000, -1000, -1000);
     }
 
     @SubscribeEvent
     public void onRenderWorldLast(final RenderWorldLastEvent event) {
         if (!FrogMod.INSTANCE.getFrogModConfig().throneFinder) return;
-        if (throneCords.getY() > 10) {
+        if (throneCords.getY() != -1000) {
             Visual.drawFilledEsp(new BlockPos(throneCords.getX(), throneCords.getY(), throneCords.getZ()), Color.GREEN);
             Visual.renderWaypointText("Throne", new BlockPos(throneCords.getX(), throneCords.getY(), throneCords.getZ()), event.partialTicks);
         }
 
 
     }
-
 
     @SubscribeEvent
     public void onTick(TickEvent event) {
@@ -90,6 +92,9 @@ public class ThroneFinder {
                                 if (FrogMod.mc.theWorld.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.cobblestone_wall && isThrone(x, y, z)) {
                                     FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Found throne at: "  + EnumChatFormatting.YELLOW + "X = " + x + ", Y = " + y + ", Z = " + z));
                                     sayThrone = false;
+                                    throneCords = new BlockPos(x, y , z);
+                                    Visual.showTitle("&cFOUND THRONE", "", 5, 45, 5);
+                                    Minecraft.getMinecraft().thePlayer.playSound("random.orb", 1, 6);
                                 }
                             }
                         }

@@ -1,6 +1,7 @@
 package com.xef5000.utils;
 
 import com.xef5000.FrogMod;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.client.Minecraft;
 
@@ -30,10 +31,13 @@ public class Visual {
     public static final RenderManager renderManager;
     public static void showTitle(String title, String subtitle, int fadeIn, int time, int fadeOut) {
         GuiIngame gui = Minecraft.getMinecraft().ingameGUI;
-        gui.displayTitle(addColor(title), addColor(subtitle), fadeIn, time, fadeOut);
+        gui.displayTitle(addColor(title), null, fadeIn, time, fadeOut);
+        gui.displayTitle(null, addColor(subtitle), fadeIn, time, fadeOut);
+        gui.displayTitle(null, null, fadeIn, time, fadeOut);
     }
+
     public static String addColor(String message) {
-        return message.toString().replace("(?<!\\\\)&(?![^0-9a-fk-or]|$)", "\u00a7");
+        return message.toString().replaceAll("(?<!\\\\)&(?![^0-9a-fk-or]|$)", "\u00a7");
     }
 
 
