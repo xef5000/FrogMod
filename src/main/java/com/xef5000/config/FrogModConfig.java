@@ -11,7 +11,9 @@ import java.io.File;
 
 public class FrogModConfig extends Vigilant {
 
-
+    // *
+    // * Mining
+    // *
     @Property(
             type = PropertyType.SWITCH, name = "Throne Finder",
             description = "Will try to find thrones in the crystals hollows.",
@@ -34,7 +36,17 @@ public class FrogModConfig extends Vigilant {
     )
     public boolean xaltFinder = false;
 
+    @Property(
+            type = PropertyType.SWITCH, name = "Unbreakable Cobble",
+            description = "This will make all cobblestone unbreakable. Useful when making platforms in the crystal hollows",
+            category = "Mining", subcategory = "Crystal Hollows"
+    )
+    public boolean unbreakableCobble = false;
 
+
+    // *
+    // * Dungeons
+    // *
     @Property(
             type = PropertyType.TEXT, name = "Toxic death message",
             description = "Will send a message when a player dies. Example: \"player you should download FrogMod to stop dying!\"",

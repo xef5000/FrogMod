@@ -1,16 +1,21 @@
 package com.xef5000.features;
 
 import com.xef5000.FrogMod;
+import com.xef5000.utils.Visual;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.tileentity.TileEntityCommandBlock;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import scala.Int;
 
 import javax.sound.midi.Soundbank;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class ThroneFinder {
@@ -28,6 +33,7 @@ public class ThroneFinder {
     private IBlockState state;
     private boolean sayThrone = true;
 
+    private BlockPos throneCords;
     public boolean sayNewStructure = true;
 
 
@@ -35,6 +41,17 @@ public class ThroneFinder {
     @SubscribeEvent
     public void onWorldLoad(WorldEvent.Load event) {
         sayThrone = true;
+    }
+
+    @SubscribeEvent
+    public void onRenderWorldLast(final RenderWorldLastEvent event) {
+        if (!FrogMod.INSTANCE.getFrogModConfig().throneFinder) return;
+        if (throneCords.getY() > 10) {
+            Visual.drawFilledEsp(new BlockPos(throneCords.getX(), throneCords.getY(), throneCords.getZ()), Color.GREEN);
+            Visual.renderWaypointText("Throne", new BlockPos(throneCords.getX(), throneCords.getY(), throneCords.getZ()), event.partialTicks);
+        }
+
+
     }
 
 

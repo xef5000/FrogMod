@@ -4,6 +4,7 @@ import com.xef5000.commands.FrogModMainCommand;
 import com.xef5000.config.FrogModConfig;
 import com.xef5000.features.TerminalOverlay;
 import com.xef5000.features.ThroneFinder;
+import com.xef5000.features.UnbreakableCobble;
 import com.xef5000.features.XaltFinder;
 import com.xef5000.listeners.ChatListener;
 import net.minecraft.client.Minecraft;
@@ -15,7 +16,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 
-@Mod(modid = "frogmod", version = "1.1.0")
+@Mod(modid = "frogmod", version = "1.1-pre1")
 public class FrogMod {
 
 
@@ -34,6 +35,7 @@ public class FrogMod {
         MinecraftForge.EVENT_BUS.register(new TerminalOverlay());
         MinecraftForge.EVENT_BUS.register(new ThroneFinder());
         MinecraftForge.EVENT_BUS.register(new XaltFinder());
+        MinecraftForge.EVENT_BUS.register(new UnbreakableCobble());
         mc = Minecraft.getMinecraft();
 
 
