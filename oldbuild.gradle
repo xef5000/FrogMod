@@ -6,11 +6,13 @@ buildscript {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
+        maven { url 'https://repo.spongepowered.org/repository/maven-public/'}
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://repo.sk1er.club/repository/maven-public" }
     }
 
     dependencies {
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
         classpath "com.github.asbyth:ForgeGradle:6f53277"
         classpath "com.github.jengelman.gradle.plugins:shadow:5.1.0"
     }
@@ -65,7 +67,6 @@ minecraft {
     "TweakOrder": "0"
      */
 
-
 }
 
 configurations {
@@ -78,6 +79,7 @@ repositories {
     maven { url = "https://repo.sk1er.club/repository/maven-public/" }
     maven { url = "https://jitpack.io/" }
     maven { url = "https://repo.spongepowered.org/repository/maven-public/" }
+
 }
 
 
@@ -120,41 +122,42 @@ shadowJar {
 
     configurations = [project.configurations.embed]
 
+
     manifest.attributes(
             'FMLCorePluginContainsFMLMod': true,
             "ForceLoadAsMod": true,
-            "MixingConfigs": "mixins.frogmod.json",
+            "MixinConfigs": "mixins.frogmod.json",
             'ModSide': 'CLIENT',
             "TweakClass": "gg.essential.loader.stage0.EssentialSetupTweaker",
-            "TweakOrder": "0"
+            "TweakOrder": "0",
     )
 }
 
 reobfJar.dependsOn tasks.shadowJar
 
-        reobf {
-            shadowJar {
-                mappingType = 'SEARGE'
-            }
-        }
+reobf {
+    shadowJar {
+        mappingType = 'SEARGE'
+    }
+}
 
 
 processResources
-{
-    // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
+        {
+            // this will ensure that this task is redone when the versions change.
+            inputs.property "version", project.version
+            inputs.property "mcversion", project.minecraft.version
 
-    // replace stuff in mcmod.info, nothing else
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
+            // replace stuff in mcmod.info, nothing else
+            from(sourceSets.main.resources.srcDirs) {
+                include 'mcmod.info'
 
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
-    }
+                // replace version and mcversion
+                expand 'version':project.version, 'mcversion':project.minecraft.version
+            }
 
-    // copy everything else, thats not the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
-}
+            // copy everything else, thats not the mcmod.info
+            from(sourceSets.main.resources.srcDirs) {
+                exclude 'mcmod.info'
+            }
+        }
