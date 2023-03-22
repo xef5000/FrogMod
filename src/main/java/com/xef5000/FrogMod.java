@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 
-@Mod(modid = "frogmod", version = "1.1-pre1")
+@Mod(modid = "frogmod", version = "1.1-pre2")
 public class FrogMod {
 
 
