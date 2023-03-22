@@ -11,9 +11,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerControllerMP.class)
-public abstract class MixinBlockClick {
+public abstract class MixinPlayerControllerMP {
 
-    @Inject(method = "clickBlock", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "clickBlock", at = @At("HEAD"), cancellable = true, remap = true)
     private void onClickBlock(BlockPos loc, EnumFacing face, CallbackInfoReturnable<Boolean> cir) {
         if (MinecraftForge.EVENT_BUS.post(new HitBlockEvent(loc))) {
             cir.setReturnValue(false);
