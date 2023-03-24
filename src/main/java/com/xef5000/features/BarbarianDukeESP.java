@@ -2,6 +2,8 @@ package com.xef5000.features;
 
 import com.xef5000.FrogMod;
 import com.xef5000.utils.Visual;
+import com.xef5000.utils.HypixelEntities;
+import com.xef5000.utils.HypixelEntity;
 import net.minecraft.util.StringUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandTitle;
@@ -15,6 +17,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityArmorStand;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.Vec3;
 
 import javax.sound.midi.Soundbank;
 import java.awt.*;
@@ -45,20 +48,10 @@ public class BarbarianDukeESP {
             if (ticks % 5 == 0) { // Every 250ms
                 ticks = 0;
                 new Thread(() -> {
-                    // Get every entities in the world
-                    for (Entity entity : Minecraft.getMinecraft().theWorld.loadedEntityList) {
-                        if (entity instanceof EntityArmorStand) {
-                            EntityArmorStand armorStand = (EntityArmorStand) entity;
-                            // Get the name of the armor stand without the color codes
-                            String name = StringUtils.stripControlCodes(armorStand.getCustomNameTag());
-                            if (name.contains("Barbarian Duke")) {
-                                // Send a message to the player that the barbarian duke has been found
-                                Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Found Barbarian Duke at: " + EnumChatFormatting.YELLOW + "X = " + armorStand.posX + ", Y = " + armorStand.posY + ", Z = " + armorStand.posZ));
-                                barbarianDukeFound = true;
-                                barbarianDuke = armorStand;
-                                return;
-                            }
-                        }
+                    HypixelEntity barbarian = HypixelEntities.getEntityByName("Barbarian Duke X");
+                    barbarianDuke = HypixelEntities.getRealEntity(barbarian);
+                    if (barbarianDuke != null) {
+                        barbarianDukeFound = true;
                     }
                 }).start();
             }

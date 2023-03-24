@@ -10,15 +10,35 @@ import com.xef5000.utils.HypixelEntity;
 import net.minecraft.util.BlockPos;
 import java.awt.*;
 import net.minecraft.util.Vec3;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 
 public class HypixelEntities {
 
     private static List<HypixelEntity> entities = new ArrayList<>();
+    private static List<Entity> realEntities = new ArrayList<>();
     private static List<String> entityNames = new ArrayList<>();
     private static List<String> stationaryEntities = new ArrayList<>();
 
+    public static int ticks = 0;
+    @SubscribeEvent
+    public void onTick(TickEvent event) {
+        ticks++;
+        if (ticks % 20 == 0) {
+            ticks = 0;
+            new Thread(() -> {
+                updateEntities();
+                HypixelEntities.displayEntities();
+            }).start();
+        }
+    }
+
     public static void updateEntities() {
         entities.clear();
+        realEntities.clear();
         for (Entity entity : Minecraft.getMinecraft().theWorld.loadedEntityList) {
             if (entity instanceof EntityArmorStand) {
                 EntityArmorStand armorStand = (EntityArmorStand) entity;
@@ -28,6 +48,7 @@ public class HypixelEntities {
                     if (entityNames.contains(name)) {
                         // Add the entity to the entities list
                         entities.add(new HypixelEntity(name, new Vec3(armorStand.posX, armorStand.posY, armorStand.posZ), name, stationaryEntities.contains(name)));
+                        realEntities.add(entity);
                     }
                 }
             }
@@ -38,9 +59,15 @@ public class HypixelEntities {
         return entities;
     }
 
+    public static void displayEntities() {
+        for (HypixelEntity entity : entities) {
+            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Found " + entity.getName() + " at: "  + EnumChatFormatting.YELLOW + "X = " + entity.getLocation().xCoord + ", Y = " + entity.getLocation().yCoord + ", Z = " + entity.getLocation().zCoord));
+        }
+    }
+
     public static HypixelEntity getEntityByName(String name) {
         for (HypixelEntity entity : entities) {
-            if (entity.getName().equals(name)) {
+            if (entity.getName().contains(name)) {
                 return entity;
             }
         }
@@ -59,7 +86,7 @@ public class HypixelEntities {
     public static List<HypixelEntity> getEntitiesByName(String name) {
         List<HypixelEntity> entities = new ArrayList<>();
         for (HypixelEntity entity : HypixelEntities.entities) {
-            if (entity.getName().equals(name)) {
+            if (entity.getName().contains(name)) {
                 entities.add(entity);
             }
         }
@@ -80,6 +107,16 @@ public class HypixelEntities {
 
     public static void clearEntityNames() {
         entityNames.clear();
+    }
+
+    // Get the real entity from the HypixelEntity
+    public static Entity getRealEntity(HypixelEntity entity) {
+        for (int i = 0; i < entities.size(); i++) {
+            if (entities.get(i).equals(entity)) {
+                return realEntities.get(i);
+            }
+        }
+        return null;
     }
 
     public static void addWaypointToEntities(String name) {

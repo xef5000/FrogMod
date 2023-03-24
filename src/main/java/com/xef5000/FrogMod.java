@@ -5,6 +5,7 @@ import com.xef5000.commands.CHScanCommand;
 import com.xef5000.commands.FrogModMainCommand;
 import com.xef5000.config.FrogModConfig;
 import com.xef5000.features.*;
+import com.xef5000.utils.HypixelEntities;
 import com.xef5000.listeners.ChatListener;
 import com.xef5000.utils.LocationManager;
 import com.xef5000.utils.Visual;
@@ -49,6 +50,7 @@ public class FrogMod {
         MinecraftForge.EVENT_BUS.register(new UnbreakableCobble());
         MinecraftForge.EVENT_BUS.register(new WaypointsManager());
         MinecraftForge.EVENT_BUS.register(new BarbarianDukeESP());
+        MinecraftForge.EVENT_BUS.register(new HypixelEntities());
         MinecraftForge.EVENT_BUS.register(CrystalScanner.getInstance());
         MinecraftForge.EVENT_BUS.register(LocationManager.getInstance());
         mc = Minecraft.getMinecraft();
