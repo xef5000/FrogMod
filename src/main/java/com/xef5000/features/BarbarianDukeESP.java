@@ -13,6 +13,8 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import scala.Int;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityArmorStand;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 
 import javax.sound.midi.Soundbank;
 import java.awt.*;
@@ -50,6 +52,8 @@ public class BarbarianDukeESP {
                             // Get the name of the armor stand without the color codes
                             String name = StringUtils.stripControlCodes(armorStand.getCustomNameTag());
                             if (name.contains("Barbarian Duke")) {
+                                // Send a message to the player that the barbarian duke has been found
+                                Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Found Barbarian Duke at: " + EnumChatFormatting.YELLOW + "X = " + armorStand.posX + ", Y = " + armorStand.posY + ", Z = " + armorStand.posZ));
                                 barbarianDukeFound = true;
                                 barbarianDuke = armorStand;
                                 return;
