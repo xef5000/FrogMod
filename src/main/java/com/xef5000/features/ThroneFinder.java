@@ -2,6 +2,7 @@ package com.xef5000.features;
 
 import com.xef5000.FrogMod;
 import com.xef5000.utils.Visual;
+import com.xef5000.utils.WaypointsManager;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandTitle;
@@ -71,7 +72,6 @@ public class ThroneFinder {
                 final int x = 0;
                 int y;
                 int z;
-
                  */
                 scannerWidth = FrogMod.INSTANCE.getFrogModConfig().throneFinderRange;
                 new Thread(() -> {
@@ -92,7 +92,8 @@ public class ThroneFinder {
                                 if (FrogMod.mc.theWorld.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.cobblestone_wall && isThrone(x, y, z)) {
                                     FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Found throne at: "  + EnumChatFormatting.YELLOW + "X = " + x + ", Y = " + y + ", Z = " + z));
                                     sayThrone = false;
-                                    throneCords = new BlockPos(x, y , z);
+                                    //throneCords = new BlockPos(x, y , z);
+                                    WaypointsManager.addWaypoint(new BlockPos(x, y, z), "Throne");
                                     Visual.showTitle("&cFOUND THRONE", "", 5, 45, 5);
                                     Minecraft.getMinecraft().thePlayer.playSound("random.orb", 1, 6);
                                 }
