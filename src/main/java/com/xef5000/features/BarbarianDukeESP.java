@@ -49,7 +49,7 @@ public class BarbarianDukeESP {
                             EntityArmorStand armorStand = (EntityArmorStand) entity;
                             // Get the name of the armor stand without the color codes
                             String name = StringUtils.stripControlCodes(armorStand.getCustomNameTag());
-                            if (name.equals("§c§lBarbarian Duke")) {
+                            if (name.contains("Barbarian Duke")) {
                                 barbarianDukeFound = true;
                                 barbarianDuke = armorStand;
                                 return;
