@@ -12,6 +12,16 @@ import java.io.File;
 public class FrogModConfig extends Vigilant {
 
     // *
+    // * Crimson Isle
+    // *
+    @Property(
+            type = PropertyType.SWITCH, name = "Crimson Isle",
+            description = "Toggle the feature",
+            category = "Crimson Isle", subcategory = "Barbarian Duke"
+    )
+    public boolean barbarianDukeESP = false;
+
+    // *
     // * Mining
     // *
     @Property(

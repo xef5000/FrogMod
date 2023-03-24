@@ -48,6 +48,7 @@ public class FrogMod {
         MinecraftForge.EVENT_BUS.register(new XaltFinder());
         MinecraftForge.EVENT_BUS.register(new UnbreakableCobble());
         MinecraftForge.EVENT_BUS.register(new WaypointsManager());
+        MinecraftForge.EVENT_BUS.register(new BarbarianDukeESP());
         MinecraftForge.EVENT_BUS.register(CrystalScanner.getInstance());
         MinecraftForge.EVENT_BUS.register(LocationManager.getInstance());
         mc = Minecraft.getMinecraft();

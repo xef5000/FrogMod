@@ -17,7 +17,11 @@ out
 build
 .gradle
 
+# vscode
+.vscode
+
 # other
 eclipse
 run
 oldbuild
+gradle.properties

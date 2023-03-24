@@ -56,6 +56,20 @@ public class Visual {
         GlStateManager.disableBlend();
     }
 
+    // Create a function to draw a filled ESP with 2 blocks height for entities
+    public static void drawFilledEsp(final Entity entity, final Color c) {
+        final AxisAlignedBB bb = entity.getEntityBoundingBox();
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        GlStateManager.disableDepth();
+        GlStateManager.disableLighting();
+        GlStateManager.color(c.getRed() / 255.0f, c.getGreen() / 255.0f, c.getBlue() / 255.0f, 0.5f);
+        drawFullAABB(bb.offset(-Visual.renderManager.viewerPosX, -Visual.renderManager.viewerPosY, -Visual.renderManager.viewerPosZ));
+        GlStateManager.enableDepth();
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
+    }
+
     private static void drawFullAABB(final AxisAlignedBB aabb) {
         final Tessellator tessellator = Tessellator.getInstance();
         final WorldRenderer worldrenderer = tessellator.getWorldRenderer();
