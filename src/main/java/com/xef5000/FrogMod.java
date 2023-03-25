@@ -1,7 +1,6 @@
 package com.xef5000;
 
 import com.google.common.collect.Sets;
-import com.xef5000.commands.CHScanCommand;
 import com.xef5000.commands.FrogModMainCommand;
 import com.xef5000.config.FrogModConfig;
 import com.xef5000.features.*;
@@ -21,7 +20,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import scala.collection.parallel.ParIterableLike;
 
 import java.util.Set;
 
@@ -29,8 +27,7 @@ import java.util.Set;
 @Mod(modid = "frogmod", version = "1.1-pre2")
 public class FrogMod {
 
-
-    public GuiScreen openGUI = null;
+    
     private FrogModConfig config = null;
     public static Minecraft mc;
     @Mod.Instance
@@ -53,7 +50,7 @@ public class FrogMod {
         MinecraftForge.EVENT_BUS.register(new RenderEntityListener());
         MinecraftForge.EVENT_BUS.register(CrystalScanner.getInstance());
         MinecraftForge.EVENT_BUS.register(LocationManager.getInstance());
-        mc = Minecraft.getMinecraft();
+
         //Visual.renderManager = FrogMod.mc.getRenderManager();
 
 
@@ -64,7 +61,7 @@ public class FrogMod {
         config.preload();
         //ThroneFinder.scannerWidth = config.throneFinderRange;
         ClientCommandHandler.instance.registerCommand(new FrogModMainCommand());
-        ClientCommandHandler.instance.registerCommand(new CHScanCommand());
+        mc = Minecraft.getMinecraft();
 
     }
 
@@ -107,6 +104,7 @@ public class FrogMod {
     @SubscribeEvent
     public void onWorldLoad(WorldEvent.Load event) {
         updateSkyblockScoreboard();
+        Visual.showTitle("§aFrogmod", "§fLoading world...", 0, 1, 0); //To make sure that all titles register correctly
     }
 
 
