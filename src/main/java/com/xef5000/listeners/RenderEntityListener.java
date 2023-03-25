@@ -79,7 +79,7 @@ public class RenderEntityListener {
                 if (entityy instanceof EntityOtherPlayerMP) npcs.add((EntityOtherPlayerMP) entityy);
             }
             if (LocationManager.getInstance().getLocation().equals("crimson_isle") && FrogMod.INSTANCE.getFrogModConfig().barbarianDukeESP && entityName.contains("Barbarian Duke")) {
-                if(!foundDuke) FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Found duke at: "  + EnumChatFormatting.YELLOW + "X = " + x + ", Y = " + y + ", Z = " + z));
+                if(!foundDuke) FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Found duke at: "  + EnumChatFormatting.YELLOW + "X = " + Math.round(x) + ", Y = " + Math.round(y) + ", Z = " + Math.round(z)));
                 foundDuke = true;
                 for (EntityOtherPlayerMP npc : npcs) {
                     Vec3 distance = getDistance(npc.getPositionVector(), new Vec3(entity.posX, entity.posY, entity.posZ));
