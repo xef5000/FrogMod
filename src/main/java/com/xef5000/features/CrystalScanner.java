@@ -46,13 +46,9 @@ public class CrystalScanner {
                 throw new RuntimeException(e);
             }
             if(FrogMod.mc == null || FrogMod.mc.theWorld == null || FrogMod.mc.thePlayer == null) return;
-            FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "WORLD SCAN"));
             if (LocationManager.getInstance().getLocation().equals("crystal_hollows")) {
-                FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Starting scan..."));
                 scan();
-                FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Finished scan..."));
             }
-            FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + LocationManager.getInstance().getLocation()));
 
         }).start();
 
@@ -76,8 +72,9 @@ public class CrystalScanner {
         WaypointsManager.removeByName("Goblin Queen");
         WaypointsManager.removeByName("Goblin King");
         WaypointsManager.removeByName("Xalx");
-        WaypointsManager.removeByName("MinesDivan");
-        WaypointsManager.removeByName("JungleTemple");
+        WaypointsManager.removeByName("Jungle Temple");
+        WaypointsManager.removeByName("Mines of Divan");
+
         structureCoords.clear();
     }
 
@@ -145,12 +142,59 @@ public class CrystalScanner {
         }).start();
     }
 
+    private void jungleScan() {
+        new Thread(() -> { // QUEEN SCAN
+
+            int x, y, z;
+
+            int belowY = 31;
+            int aboveY = 189;
+
+            for (x = 202; x < 523; ++x) {
+                for(y = belowY; y < aboveY; ++y) {
+                    for (z = 202; z < 523; ++z) {
+                        if (!structureCoords.containsKey("JungleTemple") && FrogMod.mc.theWorld.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.carpet && isTemple(x, y, z)) {
+                            BlockPos jungleCoords = new BlockPos(x - 3, y - 39, z + 5);
+                            structureCoords.put("JungleTemple", jungleCoords);
+                            WaypointsManager.addWaypoint(jungleCoords, "Jungle Temple");
+                            FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Found jungle temple at: "  + EnumChatFormatting.YELLOW + "X = " + jungleCoords.getX() + ", Y = " + jungleCoords.getY() + ", Z = " + jungleCoords.getZ()));
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
+    private void mithrilDepositScan() {
+        new Thread(() -> { // QUEEN SCAN
+
+            int x, y, z;
+
+            int belowY = 31;
+            int aboveY = 189;
+
+            for (x = 523; x < 823; ++x) {
+                for(y = belowY; y < aboveY; ++y) {
+                    for (z = 202; z < 523; ++z) {
+                        if (!structureCoords.containsKey("MinesDivan") && FrogMod.mc.theWorld.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.stained_glass && isDivan(x, y, z)) {
+                            BlockPos divanCoords = new BlockPos(x + 14, y - 35, z - 14);
+                            structureCoords.put("MinesDivan", divanCoords);
+                            WaypointsManager.addWaypoint(divanCoords, "Mines of Divan");
+                            FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Found mines of divan at: "  + EnumChatFormatting.YELLOW + "X = " + divanCoords.getX() + ", Y = " + divanCoords.getY() + ", Z = " + divanCoords.getZ()));
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
 
 
 
     public void scan() {
         if (!structureCoords.containsKey("Throne") || !structureCoords.containsKey("City")) precursorRemnantsScan();
         if (!structureCoords.containsKey("GoblinQueen") || !structureCoords.containsKey("GoblinKing") || !structureCoords.containsKey("Xalx")) golbinHoldoutScan();
+        if (!structureCoords.containsKey("JungleTemple")) jungleScan();
+        if (!structureCoords.containsKey("MinesDivan")) mithrilDepositScan();
     }
 
 
@@ -283,7 +327,33 @@ public class CrystalScanner {
 
     }
 
-    public static boolean isitxalx(double x, double y, double z) {
-        return INSTANCE.isXalx(x, y, z);
+    private boolean isTemple(double x, double y, double z) {
+        /*
+         * NORTH
+         * CHECKS
+         */
+        boolean check1_n = FrogMod.mc.theWorld.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.carpet;
+        boolean check2_n = FrogMod.mc.theWorld.getBlockState(new BlockPos(x - 6, y, z)).getBlock() == Blocks.carpet;
+        boolean check3_n = FrogMod.mc.theWorld.getBlockState(new BlockPos(x, y, z - 6)).getBlock() == Blocks.carpet;
+        boolean check4_n = FrogMod.mc.theWorld.getBlockState(new BlockPos(x - 6, y, z - 6)).getBlock() == Blocks.carpet;
+        boolean check5_n = FrogMod.mc.theWorld.getBlockState(new BlockPos(x - 1, y - 1, z)).getBlock() == Blocks.hardened_clay;
+
+        return check1_n && check2_n && check3_n && check4_n && check5_n;
     }
+
+    private boolean isDivan(double x, double y, double z) {
+        /*
+         * NORTH
+         * CHECKS
+         */
+        boolean check1_n = FrogMod.mc.theWorld.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.stained_glass;
+        boolean check2_n = FrogMod.mc.theWorld.getBlockState(new BlockPos(x, y, z + 1)).getBlock() == Blocks.stone_brick_stairs;
+        boolean check3_n = FrogMod.mc.theWorld.getBlockState(new BlockPos(x + 5, y, z - 5)).getBlock() == Blocks.stained_glass;
+        boolean check4_n = FrogMod.mc.theWorld.getBlockState(new BlockPos(x + 5, y, z - 4)).getBlock() == Blocks.stone_brick_stairs;
+
+        return check1_n && check2_n && check3_n && check4_n;
+    }
+
+
+
 }
