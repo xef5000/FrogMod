@@ -21,7 +21,7 @@ public class XaltFinder {
 
     @SubscribeEvent
     public void onRenderEntity(RenderLivingEvent.Pre<EntityLivingBase> event) {
-        if (FrogMod.INSTANCE.getFrogModConfig().xaltFinder) {
+        if (FrogMod.INSTANCE.getFrogModConfig().xalxFinder) {
             if (event.entity instanceof  EntityArmorStand) {
                 EntityArmorStand entity = (EntityArmorStand) event.entity;
                 if (!entity.hasCustomName()) return;

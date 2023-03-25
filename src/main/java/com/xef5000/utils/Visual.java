@@ -2,7 +2,7 @@ package com.xef5000.utils;
 
 import com.xef5000.FrogMod;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.*;
 import net.minecraft.client.Minecraft;
 
 import net.minecraft.client.gui.FontRenderer;
@@ -14,8 +14,6 @@ import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
@@ -42,7 +40,7 @@ public class Visual {
     }
 
 
-    public static void drawFilledEsp(final BlockPos pos, final Color c) {
+    public static void drawFilledBlockEsp(final BlockPos pos, final Color c) {
         final Block block = FrogMod.mc.theWorld.getBlockState(pos).getBlock();
         block.setBlockBoundsBasedOnState((IBlockAccess) FrogMod.mc.theWorld, pos);
         GlStateManager.enableBlend();
@@ -51,6 +49,19 @@ public class Visual {
         GlStateManager.disableLighting();
         GlStateManager.color(c.getRed() / 255.0f, c.getGreen() / 255.0f, c.getBlue() / 255.0f, 0.5f);
         drawFullAABB(block.getSelectedBoundingBox((World)FrogMod.mc.theWorld, pos).offset(-Visual.renderManager.viewerPosX, -Visual.renderManager.viewerPosY, -Visual.renderManager.viewerPosZ));
+        GlStateManager.enableDepth();
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
+    }
+
+    public static void drawFilledEsp(final Vec3 pos, final Color c) {
+        final AxisAlignedBB bb = new AxisAlignedBB(pos.xCoord, pos.yCoord, pos.zCoord, pos.xCoord + 1, pos.yCoord + 1, pos.zCoord + 1);
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        GlStateManager.disableDepth();
+        GlStateManager.disableLighting();
+        GlStateManager.color(c.getRed() / 255.0f, c.getGreen() / 255.0f, c.getBlue() / 255.0f, 0.5f);
+        drawFullAABB(bb.offset(-Visual.renderManager.viewerPosX, -Visual.renderManager.viewerPosY, -Visual.renderManager.viewerPosZ));
         GlStateManager.enableDepth();
         GlStateManager.enableTexture2D();
         GlStateManager.disableBlend();

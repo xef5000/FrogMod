@@ -2,6 +2,8 @@ package com.xef5000.features;
 
 import com.xef5000.FrogMod;
 import com.xef5000.utils.Visual;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StringUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandTitle;
@@ -50,6 +52,7 @@ public class BarbarianDukeESP {
                             // Get the name of the armor stand without the color codes
                             String name = StringUtils.stripControlCodes(armorStand.getCustomNameTag());
                             if (name.contains("Barbarian Duke")) {
+                                FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText("Found duke"));
                                 barbarianDukeFound = true;
                                 barbarianDuke = armorStand;
                                 return;
@@ -60,5 +63,7 @@ public class BarbarianDukeESP {
             }
         }
     }
+
+
 
 }

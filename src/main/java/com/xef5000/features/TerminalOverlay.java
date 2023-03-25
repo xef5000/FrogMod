@@ -29,11 +29,11 @@ public class TerminalOverlay {
     public void onRenderWorldLast(final RenderWorldLastEvent event) {
         if (!FrogMod.INSTANCE.getFrogModConfig().terminalOverlay) return;
         for (TileEntityCommandBlock commandBlock : queueRenderRed) {
-            Visual.drawFilledEsp(new BlockPos(commandBlock.getPos().getX(), commandBlock.getPos().getY(), commandBlock.getPos().getZ()), Color.RED);
+            Visual.drawFilledBlockEsp(new BlockPos(commandBlock.getPos().getX(), commandBlock.getPos().getY(), commandBlock.getPos().getZ()), Color.RED);
             Visual.renderWaypointText("Inactive Terminal", new BlockPos(commandBlock.getPos().getX(), commandBlock.getPos().getY(), commandBlock.getPos().getZ()), event.partialTicks);
         }
         for (TileEntityCommandBlock commandBlock : queueRenderGreen) {
-            Visual.drawFilledEsp(new BlockPos(commandBlock.getPos().getX(), commandBlock.getPos().getY(), commandBlock.getPos().getZ()), Color.GREEN);
+            Visual.drawFilledBlockEsp(new BlockPos(commandBlock.getPos().getX(), commandBlock.getPos().getY(), commandBlock.getPos().getZ()), Color.GREEN);
             Visual.renderWaypointText("Terminal Active", new BlockPos(commandBlock.getPos().getX(), commandBlock.getPos().getY(), commandBlock.getPos().getZ()), event.partialTicks);
         }
 

@@ -51,7 +51,7 @@ public class ThroneFinder {
     public void onRenderWorldLast(final RenderWorldLastEvent event) {
         if (!FrogMod.INSTANCE.getFrogModConfig().throneFinder) return;
         if (throneCords.getY() != -1000) {
-            Visual.drawFilledEsp(new BlockPos(throneCords.getX(), throneCords.getY(), throneCords.getZ()), Color.GREEN);
+            Visual.drawFilledBlockEsp(new BlockPos(throneCords.getX(), throneCords.getY(), throneCords.getZ()), Color.GREEN);
             Visual.renderWaypointText("Throne", new BlockPos(throneCords.getX(), throneCords.getY(), throneCords.getZ()), event.partialTicks);
         }
 

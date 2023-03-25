@@ -16,7 +16,7 @@ public class WaypointsManager {
     public void onRenderWorldLast(final RenderWorldLastEvent event) {
         for (BlockPos coords : waypoints.keySet()) {
             String str = waypoints.get(coords);
-            Visual.drawFilledEsp(coords, Color.GREEN);
+            Visual.drawFilledBlockEsp(coords, Color.GREEN);
             Visual.renderWaypointText(str, coords, event.partialTicks);
         }
 

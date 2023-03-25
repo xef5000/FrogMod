@@ -44,7 +44,7 @@ public class FrogModConfig extends Vigilant {
             description = "Will try to find xalx in the crystals hollows. Uses hypixel's render distance, so around 2 chunks.",
             category = "Mining", subcategory = "Structure Finder"
     )
-    public boolean xaltFinder = false;
+    public boolean xalxFinder = false;
 
     @Property(
             type = PropertyType.SWITCH, name = "Unbreakable Cobble",
