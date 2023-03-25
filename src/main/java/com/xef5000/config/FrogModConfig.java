@@ -38,20 +38,20 @@ public class FrogModConfig extends Vigilant {
     )
     public int crystalScannerDelay = 100;
 
-
-    @Property(
-            type = PropertyType.SWITCH, name = "Xalx Finder",
-            description = "Will try to find xalx in the crystals hollows. Uses hypixel's render distance, so around 2 chunks.",
-            category = "Mining", subcategory = "Structure Finder"
-    )
-    public boolean xalxFinder = false;
-
     @Property(
             type = PropertyType.SWITCH, name = "Unbreakable Cobble",
             description = "This will make all cobblestone unbreakable. Useful when making platforms in the crystal hollows",
             category = "Mining", subcategory = "Crystal Hollows"
     )
     public boolean unbreakableCobble = false;
+
+    @Property(
+            type = PropertyType.SWITCH, name = "Worm/Scatha alert",
+            description = "Alerts you of worm/scathas",
+            category = "Mining", subcategory = "Crystal Hollows"
+    )
+    public boolean scathaAlert = false;
+
 
 
     // *

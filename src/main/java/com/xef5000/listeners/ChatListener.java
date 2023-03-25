@@ -52,21 +52,22 @@ public class ChatListener {
                 Minecraft.getMinecraft().thePlayer.sendChatMessage("/showextrastats");
             }
         }
-        if (stripped.toLowerCase().contains("abcdef")) {
-            System.out.println("Found abcdef in in chat");
-        }
-        if (stripped.contains("[BOSS] Goldor")) {
+        if (stripped.contains("[BOSS] Goldor") && FrogMod.INSTANCE.getFrogModConfig().terminalOverlay) {
             TerminalOverlay.scanMap();
         }
-        if (stripped.contains("activated a terminal")) {
+        if (stripped.contains("activated a terminal") && FrogMod.INSTANCE.getFrogModConfig().terminalOverlay) {
             TerminalOverlay.scanMap();
         }
-        if (stripped.contains("[BOSS] Goldor: Little ants, plotting and scheming, thinking they are invincible…")) {
+        if (stripped.contains("[BOSS] Goldor: Little ants, plotting and scheming, thinking they are invincible…") && FrogMod.INSTANCE.getFrogModConfig().terminalOverlay) {
             TerminalOverlay.phase3 = true;
         }
-        if (stripped.contains("[BOSS] Necron: Goodbye.")) {
+        if (stripped.contains("[BOSS] Necron: Goodbye.") && FrogMod.INSTANCE.getFrogModConfig().terminalOverlay) {
             TerminalOverlay.phase3 = false;
             TerminalOverlay.resetRenderQueues();
+        }
+        if (stripped.equals("You hear the sound of something approaching...") && FrogMod.INSTANCE.getFrogModConfig().scathaAlert) {
+            Visual.showTitle("§cWORM SPAWNED!", "", 5, 45, 5);
+            Minecraft.getMinecraft().thePlayer.playSound("random.orb", 1, 3);
         }
 
 
