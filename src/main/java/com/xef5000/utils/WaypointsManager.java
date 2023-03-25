@@ -43,4 +43,13 @@ public class WaypointsManager {
         return null;
     }
 
+    public static String getWaypoint(String name) {
+        return waypoints.get(getPosByName(name));
+    }
+
+    public static void modifyWaypoint(String name, BlockPos pos) {
+        removeByName(name);
+        waypoints.put(pos, name);
+    }
+
 }

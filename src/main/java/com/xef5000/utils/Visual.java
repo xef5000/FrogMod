@@ -75,7 +75,7 @@ public class Visual {
         GlStateManager.disableDepth();
         GlStateManager.disableLighting();
         GlStateManager.color(c.getRed() / 255.0f, c.getGreen() / 255.0f, c.getBlue() / 255.0f, 0.5f);
-        drawFullAABB(bb.offset(-Visual.renderManager.viewerPosX, -Visual.renderManager.viewerPosY, -Visual.renderManager.viewerPosZ));
+        drawFullAABB(bb.offset(-entity.posX, -entity.posY, -entity.posZ));
         GlStateManager.enableDepth();
         GlStateManager.enableTexture2D();
         GlStateManager.disableBlend();
