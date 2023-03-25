@@ -27,6 +27,7 @@ public class RenderEntityListener {
     @SubscribeEvent
     public void onWorldLoad(WorldEvent.Load event) {
         foundXalx = false;
+        foundDuke = false;
         barbarianDuke = null;
         WaypointsManager.removeByName("Xalx");
     }
@@ -35,7 +36,7 @@ public class RenderEntityListener {
     public void onRenderWorldLast(final RenderWorldLastEvent event) {
         if (!FrogMod.INSTANCE.getFrogModConfig().barbarianDukeESP || !foundDuke) return;
         Color color = new Color(139, 69, 19);
-        Visual.drawFilledEsp(barbarianDuke, color);
+        //Visual.drawFilledEsp(barbarianDuke, color);
         Visual.drawFilledEsp(barbarianDuke.add(new Vec3(0, -1, 0)), color);
     }
 
