@@ -15,9 +15,9 @@ public class FrogModConfig extends Vigilant {
     // * Crimson Isle
     // *
     @Property(
-            type = PropertyType.SWITCH, name = "Crimson Isle",
-            description = "Toggle the feature",
-            category = "Crimson Isle", subcategory = "Barbarian Duke"
+            type = PropertyType.SWITCH, name = "Barbarian Duke ESP",
+            description = "Allows you to see barbarian duke through walls",
+            category = "Render", subcategory = "Crimson Isle"
     )
     public boolean barbarianDukeESP = false;
 
@@ -25,18 +25,18 @@ public class FrogModConfig extends Vigilant {
     // * Mining
     // *
     @Property(
-            type = PropertyType.SWITCH, name = "Throne Finder",
-            description = "Will try to find thrones in the crystals hollows.",
+            type = PropertyType.SWITCH, name = "Crystal Scanner",
+            description = "It will find all structures from the crystal hollows",
             category = "Mining", subcategory = "Structure Finder"
     )
-    public boolean throneFinder = false;
+    public boolean crystalScanner = false;
 
     @Property(
-            type = PropertyType.SLIDER, name = "Throne Finder Range",
-            description = "Range for throne finder in blocks. Recommended is 110 or under",
-            category = "Mining", subcategory = "Structure Finder", min = 15, max = 150
+            type = PropertyType.SLIDER, name = "Crystal Scanner Delay",
+            description = "Delay between each map scan, in ticks (1s = 20 ticks). Range is about 100 blocks, not changeable.",
+            category = "Mining", subcategory = "Structure Finder", min = 20, max = 300
     )
-    public int throneFinderRange = 30;
+    public int crystalScannerDelay = 100;
 
 
     @Property(
