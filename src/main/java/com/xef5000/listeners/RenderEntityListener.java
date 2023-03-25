@@ -58,7 +58,7 @@ public class RenderEntityListener {
             double y = entity.posY;
             double z = entity.posZ;
             String entityName = StringUtils.stripControlCodes(entity.getCustomNameTag());
-            if (FrogMod.INSTANCE.getFrogModConfig().xalxFinder && entityName.contains("Xalx") && !foundXalx && false) {
+            if (FrogMod.INSTANCE.getFrogModConfig().crystalScanner && entityName.contains("Xalx") && !foundXalx && false) {
                 FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Found xalx at: "  + EnumChatFormatting.YELLOW + "X = " + x + ", Y = " + y + ", Z = " + z));
                 WaypointsManager.addWaypoint(new BlockPos(x, y, z), "Xalx");
                 foundXalx = true;
