@@ -26,14 +26,14 @@ public class FrogModConfig extends Vigilant {
     // *
     @Property(
             type = PropertyType.SWITCH, name = "Crystal Scanner",
-            description = "It will find all structures from the crystal hollows",
+            description = "It will find all structures from the crystal hollows. Locations: Jungle Temple, Divan Mine, King/Queen, Xalx, Throne, City",
             category = "Mining", subcategory = "Structure Finder"
     )
     public boolean crystalScanner = false;
 
     @Property(
             type = PropertyType.SLIDER, name = "Crystal Scanner Delay",
-            description = "Delay between each map scan, in ticks (1s = 20 ticks). Range is about 100 blocks, not changeable.",
+            description = "Delay between each map scan, in ticks (1s = 20 ticks). Range is about 100-150 blocks, not changeable.",
             category = "Mining", subcategory = "Structure Finder", min = 20, max = 300
     )
     public int crystalScannerDelay = 100;
