@@ -56,6 +56,7 @@ public class CrystalScanner {
 
     @SubscribeEvent
     public void onTick(TickEvent event) {
+        if(FrogMod.mc == null || FrogMod.mc.theWorld == null || FrogMod.mc.thePlayer == null && !LocationManager.getInstance().getLocation().equals("crystal_hollows")) return;
         if (FrogMod.INSTANCE.getFrogModConfig().crystalScanner) {
             ticks++;
             if (ticks % ((FrogMod.INSTANCE.getFrogModConfig().crystalScannerDelay) * 20) == 0) {
