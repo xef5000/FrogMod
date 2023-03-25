@@ -41,7 +41,7 @@ public class RenderEntityListener {
 
     @SubscribeEvent
     public void onRenderEntity(RenderLivingEvent.Pre<EntityLivingBase> event) {
-
+        if (LocationManager.getInstance().getLocation() == null) return;
         if (!foundXalx) {
             staticNPC(event);
         }
