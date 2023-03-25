@@ -2,7 +2,6 @@ package com.xef5000.commands;
 
 import com.xef5000.FrogMod;
 import com.xef5000.features.CrystalScanner;
-import com.xef5000.features.ThroneFinder;
 import com.xef5000.utils.LocationManager;
 import gg.essential.api.utils.GuiUtil;
 import net.minecraft.command.CommandBase;
@@ -36,8 +35,11 @@ public class CHScanCommand extends CommandBase {
         //FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + LocationManager.getInstance().getLocation()));
         //FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + FrogMod.INSTANCE.hasSkyblockScoreboard()));
         //ThroneFinder.CHScan();
-        FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Starting scan..."));
-        CrystalScanner.getInstance().scan();
-        FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Finished scan..."));
+        //FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Starting scan..."));
+        //CrystalScanner.getInstance().scan();
+
+        //FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Finished scan..."));
+        //CrystalScanner.isitxalx(521, 109, 611);
+
     }
 }
