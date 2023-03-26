@@ -11,15 +11,19 @@ A Hypixel Skyblock Utilities mod.
 
 
 #### Dungeons
-- Custom toxic death message
+- Custom death message
 - Special 270/300 score message
 - Show extra stats
 - Watcher Ready/Cleared alert
 - Terminal ESP
 
 #### Mining
-- Throne finder
-- Xalx finder 
+- Crystal Scanner (Current locations: Xalx, Throne, Jungle Temple, Divan Mine, King/Queen, City)
+- Worm/Scatha alert
+- Unbreakable Cobble
+
+#### Crimson isle
+- Barbarian ESP
 
 
 ### Discord
