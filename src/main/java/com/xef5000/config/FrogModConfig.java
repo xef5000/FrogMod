@@ -2,14 +2,23 @@ package com.xef5000.config;
 
 
 import gg.essential.vigilance.Vigilant;
+import gg.essential.vigilance.data.Category;
 import gg.essential.vigilance.data.Property;
 import gg.essential.vigilance.data.PropertyType;
+import gg.essential.vigilance.data.SortingBehavior;
+import org.jetbrains.annotations.NotNull;
 
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Comparator;
 
 
 public class FrogModConfig extends Vigilant {
+
+
 
     // *
     // * Crimson Isle
@@ -111,6 +120,20 @@ public class FrogModConfig extends Vigilant {
             category = "Dungeons", subcategory = "Terminal Overlay"
     )
     public boolean terminalOverlay = true;
+
+    //
+    // Other
+    //
+    @Property(
+            type = PropertyType.BUTTON, name = "Join Discord",
+            description = "Join discord to get updates, notifications and news about the mod",
+            category = "Other", subcategory = "Discord", placeholder = "Join"
+    )
+    void action() throws URISyntaxException, IOException {
+        java.awt.Desktop.getDesktop().browse(
+                new URI("https://discord.gg/Xaw7btnMka")
+        );
+    }
 
 
 
