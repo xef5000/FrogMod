@@ -23,11 +23,14 @@ import net.minecraft.block.Block;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 
 public class Visual {
 
     public static final RenderManager renderManager;
+    private static final double HALF_PI = Math.PI / 2D;
+    private static final double PI = Math.PI;
     public static void showTitle(String title, String subtitle, int fadeIn, int time, int fadeOut) {
         GuiIngame gui = Minecraft.getMinecraft().ingameGUI;
         gui.displayTitle(addColor(title), null, fadeIn, time, fadeOut);
@@ -199,6 +202,164 @@ public class Visual {
     }
 
     //public static void drawList(Gui)
+
+    public static void drawText(String text, float x, float y, int color, boolean dropshadow) {
+        if (text == null) return;
+        FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
+        int colorAlpha = Math.max(getAlpha(color), 4);
+        int colorBlack = new Color(0, 0, 0, colorAlpha / 255F).getRGB();
+        String strippedText = Pattern.compile("(?i)§[0-9A-FK-ORZ]").matcher(text).replaceAll("");
+        fontRenderer.drawString(strippedText, x + 1, y + 0, colorBlack, dropshadow);
+        fontRenderer.drawString(strippedText, x - 1, y + 0, colorBlack, dropshadow);
+        fontRenderer.drawString(strippedText, x + 0, y + 1, colorBlack, dropshadow);
+        fontRenderer.drawString(strippedText, x + 0, y - 1, colorBlack, dropshadow);
+        fontRenderer.drawString(text, x + 0, y + 0, color, dropshadow);
+    }
+
+    public static int getAlpha(int color) {
+        return color >> 24 & 0xFF;
+    }
+    public static int getRed(int color) {return color >> 16 & 0xFF;}
+    public static int getGreen(int color) {
+        return color >> 8 & 0xFF;
+    }
+    public static int getBlue(int color) {
+        return color & 0xFF;
+    }
+
+    public static void drawRectAbsolute(double left, double top, double right, double bottom, int color) {
+        if (left < right) {
+            double savedLeft = left;
+            left = right;
+            right = savedLeft;
+        }
+        if (top < bottom) {
+            double savedTop = top;
+            top = bottom;
+            bottom = savedTop;
+        }
+        drawRectInternal(left, top, right - left, bottom - top, color, 0);
+    }
+
+    private static void drawRectInternal(double x, double y, double w, double h, int color, int rounding) {
+        if (rounding > 0) {
+            drawRoundedRectangle(x, y, w, h, color, rounding);
+            return;
+        }
+
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+
+        Tessellator.getInstance().getWorldRenderer().begin(7, DefaultVertexFormats.POSITION_COLOR);
+
+        addQuadVertices(x, y, w, h, color);
+
+        Tessellator.getInstance().draw();
+
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
+    }
+
+    private static void drawRoundedRectangle(double x, double y, double w, double h, int color, double rounding) {
+        GlStateManager.enableBlend();
+        GlStateManager.disableCull();
+        GlStateManager.disableTexture2D();
+
+        double x1, y1, x2, y2;
+        // Main vertical rectangle
+        x1 = x + rounding;
+        x2 = x + w - rounding;
+        y1 = y;
+        y2 = y + h;
+        addVertex(x1, y2, color);
+        addVertex(x2, y2, color);
+        addVertex(x2, y1, color);
+        addVertex(x1, y1, color);
+
+        // Left rectangle
+        x1 = x;
+        x2 = x + rounding;
+        y1 = y + rounding;
+        y2 = y + h - rounding;
+        addVertex(x1, y2, color);
+        addVertex(x2, y2, color);
+        addVertex(x2, y1, color);
+        addVertex(x1, y1, color);
+
+        // Right rectangle
+        x1 = x + w - rounding;
+        x2 = x + w;
+        y1 = y + rounding;
+        y2 = y + h - rounding;
+        addVertex(x1, y2, color);
+        addVertex(x2, y2, color);
+        addVertex(x2, y1, color);
+        addVertex(x1, y1, color);
+
+        int segments = 64;
+        double angleStep = HALF_PI / (float) segments;
+
+        // Top left corner
+        double startAngle = -HALF_PI;
+        double startX = x + rounding;
+        double startY = y + rounding;
+        addVertex(startX, startY, color);
+        for (int segment = 0; segment <= segments; segment++) {
+            double angle = startAngle - angleStep * segment;
+            addVertex(startX + rounding * Math.cos(angle), startY + rounding * Math.sin(angle), color);
+        }
+
+        // Top right corner
+        startAngle = 0;
+        startX = x + w - rounding;
+        startY = y + rounding;
+        addVertex(startX, startY, color);
+        for (int segment = 0; segment <= segments; segment++) {
+            double angle = startAngle - angleStep * segment;
+            addVertex(startX + rounding * Math.cos(angle), startY + rounding * Math.sin(angle), color);
+        }
+
+        // Bottom right corner
+        startAngle = HALF_PI;
+        startX = x + w - rounding;
+        startY = y + h - rounding;
+        addVertex(startX, startY, color);
+        for (int segment = 0; segment <= segments; segment++) {
+            double angle = startAngle - angleStep * segment;
+            addVertex(startX + rounding * Math.cos(angle), startY + rounding * Math.sin(angle), color);
+        }
+
+        // Bottom right corner
+        startAngle = PI;
+        startX = x + rounding;
+        startY = y + h - rounding;
+        addVertex(startX, startY, color);
+        for (int segment = 0; segment <= segments; segment++) {
+            double angle = startAngle - angleStep * segment;
+            addVertex(startX + rounding * Math.cos(angle), startY + rounding * Math.sin(angle), color);
+        }
+
+    }
+
+    private static void addQuadVertices(double x, double y, double w, double h, int color) {
+        addQuadVerticesAbsolute(x, y, x + w, y + h, color);
+    }
+
+    private static void addQuadVerticesAbsolute(double left, double top, double right, double bottom, int color) {
+        addVertex(left, bottom, color);
+        addVertex(right, bottom, color);
+        addVertex(right, top, color);
+        addVertex(left, top, color);
+    }
+
+    private static void addVertex(double x, double y, int color) {
+        final Tessellator tessellator = Tessellator.getInstance();
+        final WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+        worldrenderer.pos(x, y, 0).color(getRed(color), getGreen(color), getBlue(color), getAlpha(color)).endVertex();
+    }
+
+
 
 
     static {
