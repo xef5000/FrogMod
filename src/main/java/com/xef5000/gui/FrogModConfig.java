@@ -1,6 +1,7 @@
-package com.xef5000.config;
+package com.xef5000.gui;
 
 
+import com.xef5000.Feature;
 import gg.essential.vigilance.Vigilant;
 import gg.essential.vigilance.data.Category;
 import gg.essential.vigilance.data.Property;
@@ -18,7 +19,12 @@ import java.util.Comparator;
 
 public class FrogModConfig extends Vigilant {
 
-
+    @Property(
+            type = PropertyType.SWITCH, name = "Test Text",
+            description = "test text",
+            category = "Test", subcategory = "Test"
+    )
+    public boolean testText = true;
 
     // *
     // * Crimson Isle
