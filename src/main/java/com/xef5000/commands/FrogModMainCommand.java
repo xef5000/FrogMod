@@ -1,6 +1,7 @@
 package com.xef5000.commands;
 
 import com.xef5000.FrogMod;
+import com.xef5000.gui.LocationsEditGUI;
 import gg.essential.api.utils.GuiUtil;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
@@ -35,8 +36,12 @@ public class FrogModMainCommand extends CommandBase {
     }
 
     @Override
-    public void processCommand(ICommandSender sender, String[] args) throws CommandException {
+    public void processCommand(ICommandSender sender, String[] args) {
         //FrogMod.INSTANCE.openGUI = FrogMod.INSTANCE.config.gui();
-        GuiUtil.open(Objects.requireNonNull(FrogMod.INSTANCE.getFrogModConfig().gui()));
+        if (args.length == 0) GuiUtil.open(Objects.requireNonNull(FrogMod.INSTANCE.getFrogModConfig().gui()));
+        if (args.length >= 1) {
+            if (args[0].equalsIgnoreCase("edit")) GuiUtil.open(new LocationsEditGUI());
+        }
+
     }
 }
