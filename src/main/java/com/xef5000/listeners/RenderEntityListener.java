@@ -16,6 +16,7 @@ import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 import java.util.ArrayList;
 
 public class RenderEntityListener {
@@ -67,6 +68,15 @@ public class RenderEntityListener {
     }
 
     private void movingNPC(RenderLivingEvent.Pre<EntityLivingBase> event) {
+        if(event.entity instanceof EntityOtherPlayerMP) {
+            EntityOtherPlayerMP npc = (EntityOtherPlayerMP) event.entity;
+            if (LocationManager.getInstance().getLocation().equals("crimson_isle") && FrogMod.INSTANCE.getFrogModConfig().barbarianDukeESP && npc.getName().contains("DukeBarb")) {
+                if(!foundDuke) FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Found duke at: "  + EnumChatFormatting.YELLOW + "X = " + Math.round(npc.getPosition().getX()) + ", Y = " + Math.round(npc.getPosition().getY()) + ", Z = " + Math.round(npc.getPosition().getZ())));
+                foundDuke = true;
+                barbarianDuke = new Vec3(npc.posX - 0.5, npc.posY + 1 , npc.posZ - 0.5);
+            }
+        }
+        /*
         if (event.entity instanceof EntityArmorStand) {
             EntityArmorStand entity = (EntityArmorStand) event.entity;
             if (!entity.hasCustomName()) return;
@@ -81,7 +91,10 @@ public class RenderEntityListener {
             if (LocationManager.getInstance().getLocation().equals("crimson_isle") && FrogMod.INSTANCE.getFrogModConfig().barbarianDukeESP && entityName.contains("Barbarian Duke")) {
                 if(!foundDuke) FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Found duke at: "  + EnumChatFormatting.YELLOW + "X = " + Math.round(x) + ", Y = " + Math.round(y) + ", Z = " + Math.round(z)));
                 foundDuke = true;
+                //barbarianDuke = new Vec3(entity.posX, entity.posY , entity.posZ);
+
                 for (EntityOtherPlayerMP npc : npcs) {
+                    if(npc.getName().contains("DukeBarb")) FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText("TRUE"));
                     Vec3 distance = getDistance(npc.getPositionVector(), new Vec3(entity.posX, entity.posY, entity.posZ));
                     if ((distance.xCoord < 3 && distance.xCoord > -3) && (distance.yCoord < 3 && distance.yCoord > -3) && (distance.zCoord < 3 && distance.zCoord > -3)) {
                         barbarianDuke = new Vec3(npc.posX - 0.5, npc.posY + 1 , npc.posZ - 0.5);
@@ -91,6 +104,8 @@ public class RenderEntityListener {
                 //barbarianDuke = new Vec3(entity.posX, entity.posY, entity.posZ);
             }
         }
+
+         */
     }
 
     private Vec3 getDistance(Vec3 pos1, Vec3 pos2) {
