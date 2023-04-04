@@ -2,6 +2,7 @@ package com.xef5000.gui;
 
 
 import com.xef5000.Feature;
+import gg.essential.api.utils.GuiUtil;
 import gg.essential.vigilance.Vigilant;
 import gg.essential.vigilance.data.Category;
 import gg.essential.vigilance.data.Property;
@@ -41,7 +42,7 @@ public class FrogModConfig extends Vigilant {
     // *
     @Property(
             type = PropertyType.SWITCH, name = "Crystal Scanner",
-            description = "It will find all structures from the crystal hollows. Locations: Jungle Temple, Divan Mine, King/Queen, Xalx, Throne, City",
+            description = "Main toggle for the crystal scanner feature. Check the locations you want to be scanned down below.",
             category = "Mining", subcategory = "Structure Finder"
     )
     public boolean crystalScanner = false;
@@ -52,6 +53,27 @@ public class FrogModConfig extends Vigilant {
             category = "Mining", subcategory = "Structure Finder", min = 20, max = 300
     )
     public int crystalScannerDelay = 100;
+
+    @Property(
+            type = PropertyType.CHECKBOX, name = "Main Structures",
+            description = "Areas: Jungle Temple, Divan's Mines, Precursor City, Goblin King, Goblin Queen and Bal.",
+            category = "Mining", subcategory = "Structure Finder"
+    )
+    public boolean crystalScannerMainStructures1 = false;
+
+    @Property(
+            type = PropertyType.CHECKBOX, name = "Important Structures",
+            description = "Areas: Corleone, Grotto and Throne",
+            category = "Mining", subcategory = "Structure Finder"
+    )
+    public boolean crystalScannerImportantStructures2 = false;
+
+    @Property(
+            type = PropertyType.CHECKBOX, name = "Other Structures",
+            description = "Areas: Xalx, Pete and Odawa",
+            category = "Mining", subcategory = "Structure Finder"
+    )
+    public boolean crystalScannerOtherStructures3 = false;
 
     @Property(
             type = PropertyType.SWITCH, name = "Unbreakable Cobble",
@@ -128,6 +150,19 @@ public class FrogModConfig extends Vigilant {
     public boolean terminalOverlay = true;
 
     //
+    // QOL
+    //
+
+    @Property(
+            type = PropertyType.SWITCH, name = "Better Trade Menu",
+            description = "Adds a trade menu button in the skyblock menu",
+            category = "QOL", subcategory = "QOL"
+    )
+    public boolean betterTradeMenu = true;
+
+
+
+    //
     // Other
     //
     @Property(
@@ -135,10 +170,18 @@ public class FrogModConfig extends Vigilant {
             description = "Join discord to get updates, notifications and news about the mod",
             category = "Other", subcategory = "Discord", placeholder = "Join"
     )
-    void action() throws URISyntaxException, IOException {
+    void joinDiscord() throws URISyntaxException, IOException {
         java.awt.Desktop.getDesktop().browse(
                 new URI("https://discord.gg/Xaw7btnMka")
         );
+    }
+    @Property(
+            type = PropertyType.BUTTON, name = "Edit Locations",
+            description = "Edit the locations of the GUI elements",
+            category = "Other", subcategory = "GUI", placeholder = "Edit"
+    )
+    void editGUI() {
+        GuiUtil.open(new LocationsEditGUI());
     }
 
 
