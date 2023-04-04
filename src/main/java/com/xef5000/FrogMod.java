@@ -8,11 +8,13 @@ import com.xef5000.commands.FrogModMainCommand;
 import com.xef5000.gui.FrogModConfig;
 import com.xef5000.features.*;
 import com.xef5000.listeners.ChatListener;
+import com.xef5000.listeners.GuiListener;
 import com.xef5000.listeners.RenderEntityListener;
 import com.xef5000.listeners.RenderListener;
 import com.xef5000.utils.LocationManager;
 import com.xef5000.utils.Visual;
 import com.xef5000.utils.WaypointsManager;
+import com.xef5000.utils.objects.Keybind;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.scoreboard.ScoreObjective;
@@ -24,12 +26,13 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.lwjgl.input.Keyboard;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
 
 
 @Mod(modid = "frogmod", version = "1.1-pre2")
@@ -47,6 +50,8 @@ public class FrogMod {
     private static final Set<String> SKYBLOCK_IN_ALL_LANGUAGES = Sets.newHashSet("SKYBLOCK", "\u7A7A\u5C9B\u751F\u5B58", "\u7A7A\u5CF6\u751F\u5B58");
     private static final ThreadPoolExecutor THREAD_EXECUTOR = new ThreadPoolExecutor(0, 1, 60L, TimeUnit.SECONDS,
             new LinkedBlockingQueue<>(), new ThreadFactoryBuilder().setNameFormat("FrogMod" + " - #%d").build());
+
+    private final List<Keybind> keyBindings = new LinkedList<>();
 
 
 
@@ -68,6 +73,7 @@ public class FrogMod {
         MinecraftForge.EVENT_BUS.register(CrystalScanner.getInstance());
         MinecraftForge.EVENT_BUS.register(LocationManager.getInstance());
         MinecraftForge.EVENT_BUS.register(RenderListener.getInstance());
+        MinecraftForge.EVENT_BUS.register(new GuiListener());
 
         //Visual.renderManager = FrogMod.mc.getRenderManager();
 
@@ -80,6 +86,9 @@ public class FrogMod {
         //ThroneFinder.scannerWidth = config.throneFinderRange;
         ClientCommandHandler.instance.registerCommand(new FrogModMainCommand());
         mc = Minecraft.getMinecraft();
+
+        Collections.addAll(keyBindings, new Keybind("Copy Chat Message", Keyboard.KEY_LCONTROL));
+        for (Keybind keybind : keyBindings) keybind.register();
 
     }
 
@@ -135,6 +144,10 @@ public class FrogMod {
         THREAD_EXECUTOR.execute(runnable);
     }
 
+    public Keybind getKeybindFromName(String name) {
+        for (Keybind keybind : keyBindings) if(keybind.getName().equals(name)) return keybind;
+        return null;
+    }
 
 
 
