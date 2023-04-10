@@ -74,6 +74,7 @@ public class FrogMod {
         MinecraftForge.EVENT_BUS.register(LocationManager.getInstance());
         MinecraftForge.EVENT_BUS.register(RenderListener.getInstance());
         MinecraftForge.EVENT_BUS.register(new GuiListener());
+        MinecraftForge.EVENT_BUS.register(new FerocitySound());
 
         //Visual.renderManager = FrogMod.mc.getRenderManager();
 
