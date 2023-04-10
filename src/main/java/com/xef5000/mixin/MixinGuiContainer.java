@@ -23,10 +23,11 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(GuiContainer.class)
+@Mixin(value = GuiContainer.class, priority = 500)
 public abstract class MixinGuiContainer extends GuiScreen {
     private static boolean hasTradeMenuStack = false;
     private static final ItemStack tradeMenuStack = createItemStack(
@@ -63,7 +64,7 @@ public abstract class MixinGuiContainer extends GuiScreen {
     public void drawSlot(Slot slot, CallbackInfo ci) {
         if (slot == null) return;
         GuiContainer $this = (GuiContainer) (Object) this;
-        if ($this instanceof GuiChest && slot.getSlotIndex() < 9 && slot.getSlotIndex() > 0 && (slot.getSlotIndex() % 9 == 4)) {
+        if ($this instanceof GuiChest && slot.getSlotIndex() == 4/*< 9 && slot.getSlotIndex() > 0 && (slot.getSlotIndex() % 9 == 4)*/) {
             tradeMenuStackIndex = -1;
             hasTradeMenuStack = true;
 
@@ -88,24 +89,36 @@ public abstract class MixinGuiContainer extends GuiScreen {
                 this.itemRender.zLevel = 0.0F;
                 this.zLevel = 0.0F;
 
-                tradeMenuStackIndex = 4/*slot.getSlotIndex()*/;
+                tradeMenuStackIndex = slot.getSlotIndex();
             } else if (slot.getSlotIndex() == 0)
                 hasTradeMenuStack = false;
             else if (!($this instanceof GuiChest))
                 tradeMenuStackIndex = -1;
         }
     }
-
+/*
     @Redirect(method = "drawScreen", at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/gui/inventory/GuiContainer;renderToolTip(Lnet/minecraft/item/ItemStack;II)V"))
     public void drawScreen_renderTooltip(GuiContainer guiContainer, ItemStack stack, int x, int y) {
-        if (theSlot.slotNumber == 13) {
-            FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(" SLOT NUMBER 13 !!"));
+        //GuiContainer $this = (GuiContainer) (Object) this;
+        //GuiChest eventGui = (GuiChest) $this;
+        //ContainerChest cc = (ContainerChest) eventGui.inventorySlots;
+        //String containerName = cc.getLowerChestInventory().getDisplayName().getUnformattedText();
+        if (theSlot.slotNumber == tradeMenuStackIndex && FrogMod.INSTANCE.getFrogModConfig().betterTradeMenu) {
             this.renderToolTip(tradeMenuStack, x, y);
         } else {
-            FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText("not slot number 13"));
             this.renderToolTip(stack, x, y);
+        }
+    }
+    */
+
+    @ModifyArg(method = "drawScreen", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/inventory/GuiContainer;renderToolTip(Lnet/minecraft/item/ItemStack;II)V"), index = 0)
+    public ItemStack adjustItemStack(ItemStack itemStack) {
+        if (theSlot.slotNumber == tradeMenuStackIndex && FrogMod.INSTANCE.getFrogModConfig().betterTradeMenu) {
+            return tradeMenuStack;
+        } else {
+            return itemStack;
         }
     }
 
