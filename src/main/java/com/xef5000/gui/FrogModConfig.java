@@ -28,7 +28,7 @@ public class FrogModConfig extends Vigilant {
     public boolean testText = true;
 
     // *
-    // * Crimson Isle
+    // * Render
     // *
     @Property(
             type = PropertyType.SWITCH, name = "Barbarian Duke ESP",
@@ -149,9 +149,9 @@ public class FrogModConfig extends Vigilant {
     )
     public boolean terminalOverlay = true;
 
-    //
-    // QOL
-    //
+    // *
+    // * QOL
+    // *
 
     @Property(
             type = PropertyType.SWITCH, name = "Better Trade Menu",
@@ -159,6 +159,13 @@ public class FrogModConfig extends Vigilant {
             category = "QOL", subcategory = "QOL"
     )
     public boolean betterTradeMenu = true;
+
+    @Property(
+            type = PropertyType.SWITCH, name = "Artificial Ferocity",
+            description = "It will do ferocity sounds when you hit mobs (melee/bows) even if you don't have ferocity. SOUND ONLY.",
+            category = "QOL", subcategory = "Ferocity"
+    )
+    public boolean artificialFerocity = true;
 
 
 
