@@ -167,6 +167,13 @@ public class FrogModConfig extends Vigilant {
     )
     public boolean artificialFerocity = true;
 
+    @Property(
+            type = PropertyType.SWITCH, name = "Milestone Display",
+            description = "Milestone display...",
+            category = "QOL", subcategory = "Farming"
+    )
+    public boolean milestoneDisplay = true;
+
 
 
     //
