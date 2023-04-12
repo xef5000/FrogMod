@@ -160,6 +160,13 @@ public class FrogModConfig extends Vigilant {
     )
     public boolean betterTradeMenu = true;
 
+    @Property(
+            type = PropertyType.SWITCH, name = "Ferocity Sound Effects",
+            description = "Adds ferocity sound effects to mobs that you hit",
+            category = "QOL", subcategory = "QOL"
+    )
+    public boolean ferocitySoundEffects = true;
+
 
 
     //

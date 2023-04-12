@@ -64,6 +64,7 @@ public class FrogMod {
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new ChatListener()); // Chat Listeners
         MinecraftForge.EVENT_BUS.register(new TerminalOverlay());
+        MinecraftForge.EVENT_BUS.register(new FerocitySound());
         //MinecraftForge.EVENT_BUS.register(new ThroneFinder());
         //MinecraftForge.EVENT_BUS.register(new XaltFinder());
         MinecraftForge.EVENT_BUS.register(new UnbreakableCobble());
