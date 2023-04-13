@@ -71,7 +71,7 @@ public class PersistentValuesManager {
                 return;
             }
 
-            System.out.println("[FrogMod] Saving persistent values");
+            //System.out.println("[FrogMod] Saving persistent values");
 
             try {
                 //noinspection ResultOfMethodCallIgnored
@@ -85,7 +85,7 @@ public class PersistentValuesManager {
                 ex.printStackTrace();
             }
 
-            System.out.println("[FrogMod] Persistent Values Saved");
+            //System.out.println("[FrogMod] Persistent Values Saved");
 
             SAVE_LOCK.unlock();
         });
