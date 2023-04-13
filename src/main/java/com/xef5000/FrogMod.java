@@ -33,7 +33,7 @@ import java.util.concurrent.TimeUnit;
 
 
 
-@Mod(modid = "frogmod", version = "1.1-pre2")
+@Mod(modid = "frogmod", version = "1.1-RELEASE")
 public class FrogMod {
 
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
