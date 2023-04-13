@@ -91,13 +91,7 @@ public class MilestoneOverlay {
         if (LocationManager.getInstance().getLocation() != null && LocationManager.getInstance().getLocation().equals("garden")) {
             tick++;
 
-            if (cropSpeed.isEmpty()) cropSpeed = FrogMod.INSTANCE.getPersistentValuesManager().getPersistentValues().getCropSpeed();
-            if (cropSpeed.isEmpty()) cropSpeed = defaultCropSpeed;
-            if (milestones.isEmpty()) milestones = FrogMod.INSTANCE.getPersistentValuesManager().getPersistentValues().getMilestone();
-            if (milestones.isEmpty()) milestones = defaultMilestones;
-            if (milestoneProgression.isEmpty()) milestoneProgression = FrogMod.INSTANCE.getPersistentValuesManager().getPersistentValues().getMilestoneProgression();
-            if (milestoneProgression.isEmpty()) milestoneProgression = defaultMilestoneProgression;
-            savePersistentValues();
+            checkForEmptyValues();
             Collection<NetworkPlayerInfo> players = Minecraft.getMinecraft().thePlayer.sendQueue.getPlayerInfoMap();
             //  Milestone: Wheat 20: 68.3%
             for (NetworkPlayerInfo info : players) {
@@ -107,8 +101,18 @@ public class MilestoneOverlay {
                     name = name.replaceAll("§[f|F|r]", ""); // Output: Milestone: Wheat 20: 68.3%
                     name = EnumChatFormatting.getTextWithoutFormattingCodes(name);
                     String crop = name.split(" ")[2];
-                    String level = name.split(" ")[3].replaceAll(":", "");
-                    String percent = name.split(" ")[4].replaceAll("%", "");
+                    int offset = 0;
+                    if (crop.equals("Cocoa") || crop.equals("Sugar") || crop.equals("Nether")) {
+                        if (crop.equals("Cocoa")) crop = "Cocoa Beans";
+                        if (crop.equals("Sugar")) crop = "Sugar Cane";
+                        if (crop.equals("Nether")) crop = "Nether Wart";
+                        offset = 1;
+                    }
+
+                    if (crop.equals("N/A")) return; // Visiting another player's garden. Need this to prevent crash
+
+                    String level = name.split(" ")[3 + offset].replaceAll(":", "");
+                    String percent = name.split(" ")[4 + offset].replaceAll("%", "");
 
                     int levelInt = Integer.parseInt(level);
                     float floatPercentage = Float.parseFloat(percent);
@@ -285,6 +289,26 @@ public class MilestoneOverlay {
         }
         return newCropSpeeds;
 
+    }
+
+    public void checkForEmptyValues() {
+        boolean changed = false;
+        if (cropSpeed.isEmpty()) cropSpeed = FrogMod.INSTANCE.getPersistentValuesManager().getPersistentValues().getCropSpeed();
+        if (cropSpeed.isEmpty()) {
+            cropSpeed = defaultCropSpeed;
+            changed = true;
+        }
+        if (milestones.isEmpty()) milestones = FrogMod.INSTANCE.getPersistentValuesManager().getPersistentValues().getMilestone();
+        if (milestones.isEmpty()) {
+            milestones = defaultMilestones;
+            changed = true;
+        }
+        if (milestoneProgression.isEmpty()) milestoneProgression = FrogMod.INSTANCE.getPersistentValuesManager().getPersistentValues().getMilestoneProgression();
+        if (milestoneProgression.isEmpty()) {
+            milestoneProgression = defaultMilestoneProgression;
+            changed = true;
+        }
+        if (changed) savePersistentValues();
     }
 
     public static MilestoneOverlay getInstance() {return INSTANCE;}
