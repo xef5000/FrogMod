@@ -3,16 +3,13 @@ package com.xef5000.commands;
 import com.xef5000.FrogMod;
 import com.xef5000.features.MilestoneOverlay;
 import com.xef5000.gui.LocationsEditGUI;
-import com.xef5000.utils.LocationManager;
 import gg.essential.api.utils.GuiUtil;
 import net.minecraft.command.CommandBase;
-import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Objects;
 
 public class FrogModMainCommand extends CommandBase {
