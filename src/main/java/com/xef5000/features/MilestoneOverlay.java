@@ -150,13 +150,14 @@ public class MilestoneOverlay {
                         } else {
                             isFarming = true;
                             float cpsInterp = interp(cropsPerSecond, cropsPerSecondLast);
-                            float cpsTenInterp = interp(cropsPerSecond, cropsPerTenSecondsLast);
+                            //float cpsTenInterp = interp(cropsPerSecond, cropsPerTenSecondsLast);
                             currentCrop[4] = "§7Crops/minute: §e" + String.format("%,.2f", cpsInterp * 60);
                         }
                     }
                     currentCrop[5] = "§7in §b" + String.format("%dh%02dm", minutesLeft/60, minutesLeft%60);
 
                     //FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText("Crop: " + crop + ", Level: " + level + ", Percent: " + percent)); // Output: Crop: Wheat, Level: 20:, Percent: 68.3%
+                    break; // To improve performances ;)
                 }
             }
 
