@@ -7,10 +7,7 @@ import com.google.gson.GsonBuilder;
 import com.xef5000.commands.FrogModMainCommand;
 import com.xef5000.gui.FrogModConfig;
 import com.xef5000.features.*;
-import com.xef5000.listeners.ChatListener;
-import com.xef5000.listeners.GuiListener;
-import com.xef5000.listeners.RenderEntityListener;
-import com.xef5000.listeners.RenderListener;
+import com.xef5000.listeners.*;
 import com.xef5000.utils.LocationManager;
 import com.xef5000.utils.PersistentValuesManager;
 import com.xef5000.utils.Visual;
@@ -81,6 +78,7 @@ public class FrogMod {
         MinecraftForge.EVENT_BUS.register(new GuiListener());
         MinecraftForge.EVENT_BUS.register(new FerocitySound());
         MinecraftForge.EVENT_BUS.register(MilestoneOverlay.getInstance());
+        MinecraftForge.EVENT_BUS.register(new ToolTipListener());
 
         //Visual.renderManager = FrogMod.mc.getRenderManager();
 

@@ -4,10 +4,7 @@ package com.xef5000.gui;
 import com.xef5000.Feature;
 import gg.essential.api.utils.GuiUtil;
 import gg.essential.vigilance.Vigilant;
-import gg.essential.vigilance.data.Category;
-import gg.essential.vigilance.data.Property;
-import gg.essential.vigilance.data.PropertyType;
-import gg.essential.vigilance.data.SortingBehavior;
+import gg.essential.vigilance.data.*;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -19,7 +16,6 @@ import java.util.Comparator;
 
 
 public class FrogModConfig extends Vigilant {
-
     @Property(
             type = PropertyType.SWITCH, name = "Test Text",
             description = "test text",
@@ -150,27 +146,34 @@ public class FrogModConfig extends Vigilant {
     public boolean terminalOverlay = true;
 
     // *
-    // * QOL
+    // * General
     // *
 
     @Property(
             type = PropertyType.SWITCH, name = "Better Trade Menu",
             description = "Adds a trade menu button in the skyblock menu",
-            category = "QOL", subcategory = "QOL"
+            category = "General", subcategory = "QOL"
     )
     public boolean betterTradeMenu = true;
 
     @Property(
+            type = PropertyType.SWITCH, name = "Full NPC Price",
+            description = "Shows you the money you can make if you sold all item of that type in the trade menu",
+            category = "General", subcategory = "QOL"
+    )
+    public boolean fullNpcPrice = true;
+
+    @Property(
             type = PropertyType.SWITCH, name = "Artificial Ferocity",
             description = "It will do ferocity sounds when you hit mobs (melee/bows) even if you don't have ferocity. SOUND ONLY.",
-            category = "QOL", subcategory = "Ferocity"
+            category = "General", subcategory = "Ferocity"
     )
     public boolean artificialFerocity = true;
 
     @Property(
             type = PropertyType.SWITCH, name = "Milestone Display",
             description = "Milestone display...",
-            category = "QOL", subcategory = "Farming"
+            category = "General", subcategory = "Farming"
     )
     public boolean milestoneDisplay = true;
 
@@ -201,10 +204,14 @@ public class FrogModConfig extends Vigilant {
 
 
     public FrogModConfig() {
-        super(new File("./config/frogmod.toml"), "FrogMod");
+        super(new File("./config/frogmod.toml"), "FrogMod", new JVMAnnotationPropertyCollector(), new FrogModSortingBehavior());
         setCategoryDescription("Automatic Messages", "Here you can add/customize the automatic messages that will be sent in chat.");
         initialize();
+
     }
+
+
+
 
 
 
