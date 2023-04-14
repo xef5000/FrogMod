@@ -18,6 +18,7 @@ public class PersistentValuesManager {
     public static class PersistentValues {
         private Map<String, Integer> cropSpeed = new HashMap<>();
         private Map<String, Integer> milestone = new HashMap<>();
+        private Map<String, Integer> milestoneProgression = new HashMap<>();
 
         public Map<String, Integer> getMilestone() {
             return milestone;
@@ -27,7 +28,6 @@ public class PersistentValuesManager {
             return milestoneProgression;
         }
 
-        private Map<String, Integer> milestoneProgression = new HashMap<>();
 
         public Map<String, Integer> getCropSpeed() {
             return cropSpeed;
