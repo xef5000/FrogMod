@@ -18,7 +18,7 @@ public class ChatListener {
         if (FrogMod.INSTANCE.getFrogModConfig().toxicDeathMessage) {
             if(stripped.contains("☠") && stripped.endsWith("became a ghost.") && !stripped.contains(":")) {
                 String deadPlayer = stripped.split(" ")[2];
-                if(deadPlayer.equals("You")) return;
+                if(deadPlayer.equals("You") || deadPlayer.equals(FrogMod.mc.thePlayer.getName())) return;
                 Minecraft.getMinecraft().thePlayer.sendChatMessage("/pc " + FrogMod.INSTANCE.getFrogModConfig().deathMessageMessage.replace("player", deadPlayer));
 
             }
@@ -68,6 +68,10 @@ public class ChatListener {
         if (stripped.equals("You hear the sound of something approaching...") && FrogMod.INSTANCE.getFrogModConfig().scathaAlert) {
             Visual.showTitle("§cWORM SPAWNED!", "", 5, 45, 5);
             Minecraft.getMinecraft().thePlayer.playSound("random.orb", 1, 3);
+        }
+        if (stripped.replaceAll(stripped.split(" ")[0], "").equals(" has arrived on your Garden!") && FrogMod.INSTANCE.getFrogModConfig().visitorNotifier) {
+            Visual.showTitle("§cNEW VISITOR", "§3" + stripped.split(" ")[0], 5, 45, 5);
+            Minecraft.getMinecraft().thePlayer.playSound("random.orb", 1, 6);
         }
 
 

@@ -172,11 +172,17 @@ public class FrogModConfig extends Vigilant {
 
     @Property(
             type = PropertyType.SWITCH, name = "Milestone Display",
-            description = "Milestone display...",
+            description = "Displays information about your current milestone",
             category = "General", subcategory = "Farming"
     )
     public boolean milestoneDisplay = true;
 
+    @Property(
+            type = PropertyType.SWITCH, name = "Visitor Notifier",
+            description = "Notifies you when a visitor joins you",
+            category = "General", subcategory = "Farming"
+    )
+    public boolean visitorNotifier = true;
 
 
     //
