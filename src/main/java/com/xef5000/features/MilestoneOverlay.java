@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -186,7 +187,7 @@ public class MilestoneOverlay {
                         counter = ea.getInteger("mined_crops");
                         counterQueue.add(0, counter);
                     } else if (ea.hasKey("farmed_cultivating", 99)) {
-                        counter = ea.getInteger("mined_crops");
+                        counter = ea.getInteger("farmed_cultivating");
                         counterQueue.add(0, counter);
                     }
                 }
