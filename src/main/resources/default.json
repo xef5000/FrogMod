@@ -1,11 +1,17 @@
 {
-  "disabledFeatures": [
-    1
-  ],
-  "anchorPoints": {
-    "1": 1
-  },
+  "disabledFeatures": [],
+  "anchorPoints": {},
   "guiScales": {
     "1": 0.25
-  }
+  },
+  "coordinates": {
+  "1": [
+    771.0,
+    186.0
+  ],
+  "2": [
+    60.0,
+    65.0
+  ]
+}
 }
