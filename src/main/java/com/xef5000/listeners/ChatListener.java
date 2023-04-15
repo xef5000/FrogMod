@@ -69,7 +69,7 @@ public class ChatListener {
             Visual.showTitle("§cWORM SPAWNED!", "", 5, 45, 5);
             Minecraft.getMinecraft().thePlayer.playSound("random.orb", 1, 3);
         }
-        if (stripped.replaceAll(stripped.split(" ")[0], "").equals(" has arrived on your Garden!") && FrogMod.INSTANCE.getFrogModConfig().visitorNotifier) {
+        if (stripped.contains(" ") && stripped.replaceAll(stripped.split(" ")[0], "").equals(" has arrived on your Garden!") && FrogMod.INSTANCE.getFrogModConfig().visitorNotifier) {
             Visual.showTitle("§cNEW VISITOR", "§3" + stripped.split(" ")[0], 5, 45, 5);
             Minecraft.getMinecraft().thePlayer.playSound("random.orb", 1, 6);
         }
