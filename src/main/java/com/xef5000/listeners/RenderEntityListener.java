@@ -24,12 +24,14 @@ public class RenderEntityListener {
     private boolean foundXalx;
     private boolean foundDuke;
     public static Vec3 barbarianDuke = null;
+    public static Entity barbarianDukeEntity = null;
 
     @SubscribeEvent
     public void onWorldLoad(WorldEvent.Load event) {
         foundXalx = false;
         foundDuke = false;
         barbarianDuke = null;
+        barbarianDukeEntity = null;
         WaypointsManager.removeByName("Xalx");
     }
 
@@ -39,6 +41,7 @@ public class RenderEntityListener {
         Color color = new Color(139, 69, 19);
         //Visual.drawFilledEsp(barbarianDuke, color);
         Visual.drawFilledEsp(barbarianDuke.add(new Vec3(0, -1, 0)), color);
+        //Visual.drawFilledEsp(barbarianDukeEntity, color);
     }
 
     @SubscribeEvent
@@ -74,6 +77,7 @@ public class RenderEntityListener {
                 if(!foundDuke) FrogMod.mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "FrogMod -> " + EnumChatFormatting.WHITE + "Found duke at: "  + EnumChatFormatting.YELLOW + "X = " + Math.round(npc.getPosition().getX()) + ", Y = " + Math.round(npc.getPosition().getY()) + ", Z = " + Math.round(npc.getPosition().getZ())));
                 foundDuke = true;
                 barbarianDuke = new Vec3(npc.posX - 0.5, npc.posY + 1 , npc.posZ - 0.5);
+                barbarianDukeEntity = npc;
             }
         }
         /*

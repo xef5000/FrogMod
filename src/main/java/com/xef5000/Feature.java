@@ -10,10 +10,11 @@ import java.util.Set;
 
 public enum Feature {
 
-    TEST_TEXT(1, 0, "testText");
+    TEST_TEXT(1, 0, "testText"),
+    MILESTONE_OVERLAY(2, 0, "milestoneDisplay");
 
 
-    public static final Set<Feature> guiFeatures = new HashSet<>(Arrays.asList(new Feature[]{TEST_TEXT}));
+    public static final Set<Feature> guiFeatures = new HashSet<>(Arrays.asList(new Feature[]{TEST_TEXT, MILESTONE_OVERLAY}));
 
 
 

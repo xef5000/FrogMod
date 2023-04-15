@@ -12,6 +12,7 @@ import com.xef5000.listeners.GuiListener;
 import com.xef5000.listeners.RenderEntityListener;
 import com.xef5000.listeners.RenderListener;
 import com.xef5000.utils.LocationManager;
+import com.xef5000.utils.PersistentValuesManager;
 import com.xef5000.utils.Visual;
 import com.xef5000.utils.WaypointsManager;
 import com.xef5000.utils.objects.Keybind;
@@ -43,6 +44,7 @@ public class FrogMod {
 
     private FrogModConfig config = null;
     private ConfigValues configValues;
+    private PersistentValuesManager persistentValuesManager;
     public static Minecraft mc;
     @Mod.Instance
     public static FrogMod INSTANCE = null;
@@ -59,7 +61,10 @@ public class FrogMod {
     public void preinit(FMLPreInitializationEvent event) {
         INSTANCE = this;
         configValues = new ConfigValues(event.getSuggestedConfigurationFile());
+        persistentValuesManager = new PersistentValuesManager(event.getModConfigurationDirectory());
         configValues.loadValues();
+        persistentValuesManager.loadValues();
+
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new ChatListener()); // Chat Listeners
@@ -75,6 +80,9 @@ public class FrogMod {
         MinecraftForge.EVENT_BUS.register(LocationManager.getInstance());
         MinecraftForge.EVENT_BUS.register(RenderListener.getInstance());
         MinecraftForge.EVENT_BUS.register(new GuiListener());
+        MinecraftForge.EVENT_BUS.register(new FerocitySound());
+        MinecraftForge.EVENT_BUS.register(new CropsHitBox());
+        MinecraftForge.EVENT_BUS.register(MilestoneOverlay.getInstance());
 
         //Visual.renderManager = FrogMod.mc.getRenderManager();
 
@@ -149,6 +157,8 @@ public class FrogMod {
         for (Keybind keybind : keyBindings) if(keybind.getName().equals(name)) return keybind;
         return null;
     }
+
+    public PersistentValuesManager getPersistentValuesManager() {return persistentValuesManager;}
 
 
 

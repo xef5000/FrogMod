@@ -267,11 +267,11 @@ public class LocationsEditGUI extends GuiScreen {
                 return;
             }
 
-            float x = floatMouseX /*- FrogMod.INSTANCE.getConfigValues().getAnchorPoint(draggedFeature).getX(sr.getScaledWidth())*/;
-            float y = floatMouseY /*- FrogMod.INSTANCE.getConfigValues().getAnchorPoint(draggedFeature).getY(sr.getScaledHeight())*/;
+            float x = floatMouseX /*- FrogMod.INSTANCE.getConfigValues().getRelativeCoords(draggedFeature).getX()*/;
+            float y = floatMouseY /*- FrogMod.INSTANCE.getConfigValues().getRelativeCoords(draggedFeature).getY()*/;
 
             FrogMod.INSTANCE.getConfigValues().setCoords(draggedFeature, x, y);
-            /*FrogMod.INSTANCE.getConfigValues().setClosestAnchorPoint(draggedFeature);*/
+            //FrogMod.INSTANCE.getConfigValues().setClosestAnchorPoint(draggedFeature);
 
         }
     }

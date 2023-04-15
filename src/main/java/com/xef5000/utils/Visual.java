@@ -71,7 +71,7 @@ public class Visual {
     }
 
     // Create a function to draw a filled ESP with 2 blocks height for entities
-    public static void drawFilledEsp(final Entity entity, final Color c) {
+    public static void drawFilledEsp(final Entity entity, final Color c, boolean old) {
         final AxisAlignedBB bb = entity.getEntityBoundingBox();
         GlStateManager.enableBlend();
         GlStateManager.disableTexture2D();
@@ -82,6 +82,32 @@ public class Visual {
         GlStateManager.enableDepth();
         GlStateManager.enableTexture2D();
         GlStateManager.disableBlend();
+    }
+    public static void drawFilledEsp(final Entity entity, final Color c) {
+        final AxisAlignedBB aabb = entity.getEntityBoundingBox();
+        GlStateManager.disableDepth();
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        GlStateManager.disableLighting();
+        GlStateManager.color(c.getRed() / 255.0f, c.getGreen() / 255.0f, c.getBlue() / 255.0f, c.getAlpha() / 255.0f);
+        drawFullAABB(aabb.offset(-renderManager.viewerPosX, -renderManager.viewerPosY, -renderManager.viewerPosZ));
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
+        GlStateManager.enableDepth();
+    }
+
+    public static void drawFilledESP(final AxisAlignedBB aabb, final Color c, final float width) {
+        GlStateManager.disableDepth();
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        GlStateManager.disableLighting();
+        GL11.glLineWidth(width);
+        GlStateManager.color(c.getRed() / 255.0f, c.getGreen() / 255.0f, c.getBlue() / 255.0f, c.getAlpha() / 255.0f);
+        drawFullAABB(aabb.offset(-renderManager.viewerPosX, -renderManager.viewerPosY, -renderManager.viewerPosZ));
+        GlStateManager.enableTexture2D();
+        GL11.glLineWidth(1.0f);
+        GlStateManager.enableBlend();
+        GlStateManager.enableDepth();
     }
 
     private static void drawFullAABB(final AxisAlignedBB aabb) {
