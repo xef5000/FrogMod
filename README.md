@@ -9,6 +9,9 @@ A Hypixel Skyblock Utilities mod.
  
 ## Features
 
+#### General
+- Better Trade Menu
+- Full NPC Price
 
 #### Dungeons
 - Custom death message
@@ -18,12 +21,18 @@ A Hypixel Skyblock Utilities mod.
 - Terminal ESP
 
 #### Mining
-- Crystal Scanner (Current locations: Xalx, Throne, Jungle Temple, Divan Mine, King/Queen, City)
+- Crystal Scanner (Current locations: Jungle Temple, Divan Mine, King/Queen, City, Bal, Throne, Corleone, Grotto, Xalx, Pete, Odawa)
 - Worm/Scatha alert
 - Unbreakable Cobble
 
-#### Crimson isle
+#### Farming
+- Milstone display
+- Visitor Notifier
+- 1x1x1 Crops HitBox
+
+#### Combat
 - Barbarian ESP
+- Artifical Ferocity
 
 
 ### Discord
