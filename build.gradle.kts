@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "com.xef5000.frogmod"
-version = "1.1-pre2"
+version = "1.1-RELEASE"
 
 // Toolchains:
 java {

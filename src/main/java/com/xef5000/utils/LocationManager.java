@@ -4,22 +4,15 @@ package com.xef5000.utils;
 
 import com.xef5000.FrogMod;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
-
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 
 //CLASS STOLEN FROM NEU
@@ -29,12 +22,18 @@ public class LocationManager {
 
     private static final Pattern JSON_BRACKET_PATTERN = Pattern.compile("^\\{.+}");
 
+    private long lastLocRaw = -1;
+    public long joinedWorld = -1;
+
     private JsonObject locraw = null;
     public String mode = null;
 
     @SubscribeEvent
     public void onWorldLoad(WorldEvent.Load event) {
         setLocation(null);
+        locraw = null;
+        lastLocRaw = System.currentTimeMillis();
+        joinedWorld = System.currentTimeMillis();
     }
 
     @SubscribeEvent(priority = EventPriority.LOW, receiveCanceled = true)
@@ -52,6 +51,18 @@ public class LocationManager {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void onTick(TickEvent event) {
+        long currentTime = System.currentTimeMillis();
+
+        if (FrogMod.mc.thePlayer != null && FrogMod.mc.theWorld != null && locraw == null &&
+                (currentTime - joinedWorld) > 1000 &&
+                (currentTime - lastLocRaw) > 2500) {
+            lastLocRaw = System.currentTimeMillis();
+            FrogMod.mc.thePlayer.sendChatMessage("/locraw");
         }
     }
 
