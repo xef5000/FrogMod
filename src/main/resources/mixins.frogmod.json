@@ -8,6 +8,9 @@
   "client": [
 	"MixinGuiMainMenu",
     "MixinPlayerControllerMP",
-    "MixinGuiContainer"
+    "MixinGuiContainer",
+    "MixinBlockCrops",
+    "BlockAccessor",
+    "MixinBlockNetherWart"
   ]
 }

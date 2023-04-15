@@ -78,10 +78,8 @@ public class FrogMod {
         MinecraftForge.EVENT_BUS.register(RenderListener.getInstance());
         MinecraftForge.EVENT_BUS.register(new GuiListener());
         MinecraftForge.EVENT_BUS.register(new FerocitySound());
-        MinecraftForge.EVENT_BUS.register(new CropsHitBox());
         MinecraftForge.EVENT_BUS.register(MilestoneOverlay.getInstance());
         MinecraftForge.EVENT_BUS.register(new ToolTipListener());
-
         //Visual.renderManager = FrogMod.mc.getRenderManager();
 
 
