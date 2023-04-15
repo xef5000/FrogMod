@@ -2,11 +2,15 @@ package com.xef5000.listeners;
 
 import com.xef5000.FrogMod;
 import com.xef5000.features.TerminalOverlay;
+import com.xef5000.utils.LocationManager;
 import com.xef5000.utils.Visual;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class ChatListener {
@@ -69,8 +73,9 @@ public class ChatListener {
             Visual.showTitle("§cWORM SPAWNED!", "", 5, 45, 5);
             Minecraft.getMinecraft().thePlayer.playSound("random.orb", 1, 3);
         }
-        if (stripped.contains(" ") && stripped.replaceAll(stripped.split(" ")[0], "").equals(" has arrived on your Garden!") && FrogMod.INSTANCE.getFrogModConfig().visitorNotifier) {
-            Visual.showTitle("§cNEW VISITOR", "§3" + stripped.split(" ")[0], 5, 45, 5);
+        if (stripped.contains("has arrived on your Garden!") && FrogMod.INSTANCE.getFrogModConfig().visitorNotifier && LocationManager.getInstance().getLocation().equals("garden")) {
+            String truevisitor = stripped.split("has arrived on your Garden!")[0];
+            Visual.showTitle("§cNEW VISITOR", "§3" + truevisitor, 5, 45, 5);
             Minecraft.getMinecraft().thePlayer.playSound("random.orb", 1, 6);
         }
 
