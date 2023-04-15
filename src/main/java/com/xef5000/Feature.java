@@ -14,7 +14,7 @@ public enum Feature {
     MILESTONE_OVERLAY(2, 0, "milestoneDisplay");
 
 
-    public static final Set<Feature> guiFeatures = new HashSet<>(Arrays.asList(new Feature[]{TEST_TEXT, MILESTONE_OVERLAY}));
+    public static final Set<Feature> guiFeatures = new HashSet<>(Arrays.asList(new Feature[]{MILESTONE_OVERLAY}));
 
 
 

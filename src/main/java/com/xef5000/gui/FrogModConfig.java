@@ -16,22 +16,13 @@ import java.util.Comparator;
 
 
 public class FrogModConfig extends Vigilant {
-    @Property(
-            type = PropertyType.SWITCH, name = "Test Text",
-            description = "test text",
-            category = "Test", subcategory = "Test"
-    )
+    //@Property(
+    //        type = PropertyType.SWITCH, name = "Test Text",
+    //        description = "test text",
+    //        category = "Test", subcategory = "Test"
+    //)
     public boolean testText = true;
 
-    // *
-    // * Render
-    // *
-    @Property(
-            type = PropertyType.SWITCH, name = "Barbarian Duke ESP",
-            description = "Allows you to see barbarian duke through walls",
-            category = "Render", subcategory = "Crimson Isle"
-    )
-    public boolean barbarianDukeESP = false;
 
     // *
     // * Mining
@@ -166,9 +157,16 @@ public class FrogModConfig extends Vigilant {
     @Property(
             type = PropertyType.SWITCH, name = "Artificial Ferocity",
             description = "It will do ferocity sounds when you hit mobs (melee/bows) even if you don't have ferocity. SOUND ONLY.",
-            category = "General", subcategory = "Ferocity"
+            category = "General", subcategory = "Combat"
     )
     public boolean artificialFerocity = true;
+
+    @Property(
+            type = PropertyType.SWITCH, name = "Barbarian Duke ESP",
+            description = "Allows you to see barbarian duke through walls",
+            category = "General", subcategory = "Combat"
+    )
+    public boolean barbarianDukeESP = false;
 
     @Property(
             type = PropertyType.SWITCH, name = "Milestone Display",
@@ -183,6 +181,13 @@ public class FrogModConfig extends Vigilant {
             category = "General", subcategory = "Farming"
     )
     public boolean visitorNotifier = true;
+
+    @Property(
+            type = PropertyType.SWITCH, name = "1x1x1 Crops",
+            description = "Makes all crops 1x1x1",
+            category = "General", subcategory = "Farming"
+    )
+    public boolean oneByOneCrops = true;
 
 
     //
